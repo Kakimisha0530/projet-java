@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<!-- link rel="stylesheet" type="text/css" href="css/connexion.css" / -->
+<style>
+* {
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+html, body {
+	padding: 0;
+	padding: 0;
+}
+
+body {
+	width: 100%;
+	height: 100%;
+}
+
+a {
+	text-decoration: none;
+	color: #335115;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.page {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	padding: 10% 2%;
+}
+
+.row {
+	width: 100%;
+}
+
+form {
+	width: 40%;
+	margin: 40px auto;
+}
+
+form>div {
+	margin-bottom: 16px;
+}
+
+form input {
+	width: 100%;
+	height: 40px;
+	text-align: center;
+	border: 1px solid #94A385;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-webkit-appearance: none;
+}
+
+form input[type="submit"] {
+	border: none;
+	background: #94A385;
+	color: #FFF;
+	font-weight: bold;
+}
+
+.error {
+	color: red;
+}
+
+.lien__ button {
+	border: none;
+	background: #94A385;
+	color: #fff;
+	font-weight: bold;
+	height: 40px;
+	text-align: center;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-webkit-appearance: none;
+	margin: 10px;
+	width: 200px;
+	position: absolute;
+	top: 0;
+	right: 0;
+	cursor: pointer;
+}
+div#erreurs>p {
+	padding: 5px;
+	background: rgba(247, 5, 5, 0.1);
+	color: red;
+	border-radius: 5px;
+	width: 70%;
+}
+
+div#confirm>p {
+	padding: 5px;
+	background: rgba(6, 174, 1, 0.1);
+	color: rgb(6, 174, 1);
+	border-radius: 5px;
+	width: 70%;
+}
+</style>
+
+</head>
+<body>
+	<div class="white">
+	</div>
+	<div class="page" data-snap-ignore='true'>
+		<div class="lien__">
+			<button ng-click='open("connexion")'>CONNEXION</button>
+		</div>
+		<div id="erreurs">
+		<p ng-repeat="(ke,val) in erreurs">{{val}}</p>
+		</div>
+		<div class='confirm' ng-show="confirm">
+		<p>Votre compte a bien été crée .<br>
+		Vous pouvez maintenant vous connecter pour avoir accès à votre agenda.</p>
+		</div>
+				
+		<div class="row form">
+			<form>
+			<div>
+					<input type="text" placeholder="Nom" required="required"
+						ng-model='user.nom'>
+				</div>
+				<div>
+					<input type="text" placeholder="Prenom" required="required"
+						ng-model='user.prenom'>
+				</div>
+				<div>
+					<input type="email" placeholder="Email" required="required"
+						ng-model='user.email'>
+				</div>
+				<div>
+					<input type="text" placeholder="Téléphone" required="required"
+						ng-model='user.tel' pattern="[0-9]{10}" maxlength="10">
+				</div>
+				<div>
+					<input type="password" placeholder="Mot de passe" required="required"
+						ng-model='user.code1'>
+				</div>
+				<div>
+					<input type="password" placeholder="Confirmez le mot de passe"
+						required="required" ng-model='user.code'>
+				</div>
+				<div>
+					<input type="submit" value="INSCRIPTION" ng-click='checkForm();saveprofil(user)'>
+				</div>
+			</form>
+		</div>
+
+	</div>
+</body>
+
+</html>

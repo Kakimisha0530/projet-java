@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<!--<link rel="stylesheet" type="text/css" id="dyn"/>-->
+		<script>
+			//$("link#dyn").attr("href", "css_pages/" + ((larg < 500)?"width_inf":"width_sup")+ "/actu_detail.css");
+			//$("script#dynJS").attr("src", "js_pages/" + ((larg < 500)?"width_inf":"width_sup")+ "/actu_detail.js");
+			/*{
+				rel : "stylesheet",
+				type : "text/css",
+				href : 
+			}).appendTo("head");*/
+		</script>
+		<!--<script>
+			$("<link/>", {
+				rel : "stylesheet",
+				type : "text/css",
+				href : "css_pages/" + ((larg < 500)?"width_inf":"width_sup")+ "/actu_detail.css"
+			}).appendTo("head");
+		</script>-->
+		<link rel="stylesheet" media="screen and (max-width: 500px)" href="css_pages/width_inf/actu_detail.css" type="text/css" />
+		<link rel="stylesheet" media="screen and (min-width: 501px)" href="css_pages/width_sup/actu_detail.css" type="text/css" />
+	</head>
+
+	<body>
+
+		<div class="view_content">
+
+			<div class="header">
+				<div class="btn_back" ng-click="fil_actu()"></div>
+				<div class="rub">
+					agenda
+				</div>
+				<div class="btn_panel_right" style='background-image: url("{{user_profil.avatar}}")' onclick="openR();"></div>
+			</div>
+			<div class="slider" data-snap-ignore="true">
+				<div ng-include='"views/slider.html"'></div>
+			</div>
+			<div class="swipe_button">
+				<div class="swipe_touch {{mySwiper.class}}" ng-click='up()'></div>
+			</div>
+
+			<div class="cache_loader" ng-show='loading'>
+				<div class="loader">
+					<img src="images/loader.gif" ng-show='loading'/>
+				</div>
+			</div>
+
+			<div class="main">
+				<div  ng-if='_is_connected'>
+					<div class="spacer"></div>
+
+					<div class="wrap cate{{evenement.categorieId}}">
+						<div class="line3" onclick="upDetails();">
+							<input type="text" id="titre_texte" value="{{evenement.titre}}" style="display:none;"/>
+							<div class="texte3">
+								<div class="texte_content3">
+									<div class="event" ng-bind-html='evenement.categorie'></div>
+									<div class="titre_event" ng-bind-html='evenement.titre'></div>
+									<div class="text_contact" ng-bind-html='evenement.lieu'></div>
+								</div>
+							</div>
+							<div class="date_content_min">
+								<div class="mois">
+									{{evenement.mois}}
+								</div>
+								<div class="year">
+									{{evenement.jour}}
+								</div>
+							</div>
+							<div class='note'>
+								<div class='note_aff' style='background-image: url("images/{{evenement.note}}_star.svg");'></div>
+							</div>
+							<!--<div class="picto3" style="background: url('images/home/agenda.png') no-repeat center right; background-size: 60% auto;"></div>-->
+						</div>
+						<div class="map">
+							<iframe ng-src="{{getUrl(evenement.mapinfo)}}" frameborder="0" style="border:0"></iframe>
+							<div class="cacheMap"></div>
+						</div>
+
+						<div class="list_between">
+							<div class="list_membres">
+								<div class="liste_item {{gNum(key)}}" ng-repeat="(key,val) in evenement.part">
+									<div class="picto_avatar" style='background-image: url("{{getAvatar(val)}}");'></div>
+									<div class="membre_titre" ng-bind-html='val.nom  + " " + val.prenom'></div>
+									<div class="membre_societe" ng-bind-html='val.societe'></div>
+									<a ng-if='val.portable != ""' href='tel:{{getphone(val.portable)}}' ng-click="tracePage(61,evenement.titre + ' - appel participant - ' + val.prenom + ' ' + val.nom,true);"><div class="picto_phone"></div></a>
+									<a ng-if='val.mail != ""' href='mailto:{{val.mail}}' ng-click="tracePage(60,evenement.titre + ' - email participant - ' + val.prenom + ' ' + val.nom,true);"><div class="picto_mail"></div></a>
+								</div>
+							</div>
+						</div>
+
+						<div class='details_event'>
+							<div class='date'>
+								<b>Debut : </b>{{evenement.debutdate}}
+							</div>
+							<div class='date'>
+								<b>Fin : </b>{{evenement.findate}}
+							</div>
+							<div class = 'horaires'>
+								De {{evenement.debutheure}} &agrave; {{evenement.finheure}}
+							</div>
+							<div class = 'lieu'>
+								<p>
+									<div ng-bind-html='evenement.lieu'></div>
+									<div ng-bind-html='evenement.adresse1'></div>
+									<div ng-bind-html='evenement.postal + " " + evenement.ville'></div>
+								</p>
+							</div>
+							<br>
+							<div class = 'pratique'>
+								Acc&egrave;s : <span ng-bind-html='escapedHtml(evenement.pratique)'></span>
+							</div>
+							<br>
+							Sujets proposés : <div class = 'pratique' ng-bind-html='escapedHtml(evenement.sujetsproposes)'></div>
+							<br>
+							<div class='photo'><img src='{{evenement.photo}}'/></div>
+							<br>
+							<div class='desc' ng-bind-html='escapedHtml(evenement.texte)'></div>
+							<br>
+						</div>
+
+						<div class="list_between_interv">
+							<div class="list_membres">
+								<div class="liste_item {{gNum(key)}}" ng-repeat="(key,val) in evenement.inter">
+									<div class="picto_avatar" style='background-image: url("{{getAvatar(val)}}");'></div>
+									<div class="membre_titre" ng-bind-html='val.nom  + " " + val.prenom'></div>
+									<div class="membre_societe" ng-bind-html='val.societe'></div>
+									<a ng-if='val.portable != ""' href='tel:{{getphone(val.portable)}}' ng-click="tracePage(64,(evenement.titre + ' - appel intervenant - ' + val.prenom + ' ' + val.nom),true);"><div class="picto_phone"></div></a>
+                                    <a ng-if='val.mail != "" && !isNoMail(val.mail)' href='mailto:{{val.mail}}' ng-click="tracePage(63,(evenement.titre + ' - email intervenant - ' + val.prenom + ' ' + val.nom),true);"><div class="picto_mail"></div></a>
+								</div>
+							</div>
+						</div>
+						<!--<div class='note'>
+						Note : <div class='note_aff' style='background: url("images/{{evenement.note}}_star.svg") no-repeat 0 0;'></div>
+						</div>-->
+
+						<div class='comments'>
+							<div class='add'>
+								<textarea  class="text_comment" placeholder="laisser votre commentaire !!!!" ng-model='texte'></textarea>
+								<input class="post_comment" type='submit' value="" ng-click='poster(texte,evenement.id);texte="";'/>
+							</div>
+							<div class='liste_coms'>
+								<div class='item_com {{gNum(key)}}' ng-repeat='(key,com) in commentaires'>
+									<div class='c_com' ng-bind-html='escapedHtml(com.texte)'></div>
+									<div class="legend_comment">
+										<span class='c_nom' ng-bind-html='com.auteur'> </span>
+										<span> - Posté le </span>
+										<span class='c_date' ng-bind-html='com.dateStr'> </span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="base_line3">
+							<div class="btn_membres" onclick='upMembres();'></div><span class='count_membres'>{{evenement.participants}}</span>
+							<div class="btn_interv" onclick='upInterv();'></div><span class='count_interv'>{{evenement.intervenants}}</span>
+							<div class="btn_map" onclick='upMap();'></div>
+							<div class="btn_coms" onclick='upComs();'></div>
+							<div class="btn_note" onclick='voter();'></div>
+							<div class="btn_sync" ng-click='openUrl();'></div>
+							<!--<div class="btn_sync" onclick='addCalendar();'></div>-->
+							<div class="event_off" ng-if='evenement.inscrit != "1" && !evenement.ispast' ng-click='inscription(1)' style='background-image: url("images/addevent.svg");'></div>
+							<div class="event_on" ng-if='evenement.inscrit == "1" && !evenement.ispast' ng-click='inscription(0)' style='background-image: url("images/event_on.svg");'></div>
+						</div>
+					</div>
+					<div class="spacer"></div>
+				</div>
+				<div ng-if='!_is_connected'>
+					<div class="spacer"> </div>
+					<div ng-include='"views/hors-ligne.html"'></div>
+				</div>
+				
+			</div>				
+
+			<div class="switch">
+				<div class="btn_filactu" >
+					fil d'actualités
+				</div>
+				<div class="btn_agenda" ng-click="calendar()">
+					agenda
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	</body>
+	
+	<script type="text/javascript" id="dynJS" src="js_pages/width_inf/actu_detail.js"></script>
+
+</html>

@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html class="ng-app:animateApp" id="ng-app" ng-app="animateApp">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<!--<base href="/testAppli/angular/">-->
+		<script src="js/jquery.min.js"></script>
+			<!-- css -->
+			<script>
+				var larg = 0;
+				if (document.body) {
+					larg = Number(document.body.clientWidth);
+				}
+				else {
+					larg = Number(window.innerWidth);
+				}
+				
+				/*$("<link/>", {
+					rel : "stylesheet",
+					type : "text/css",
+					href : "css/" + ((larg < 500)?"style":"style1") + ".css"
+				}).appendTo("head");*/
+				//alert(larg);
+			</script>
+			
+			<link rel="stylesheet" media="screen and (max-width: 500px)" href="css/style.css" type="text/css" />
+			<link rel="stylesheet" media="screen and (min-width: 501px)" href="css/style1.css" type="text/css" />
+			
+			<!--<link rel="stylesheet" type="text/css" href="css/style.css" />-->
+			<link rel="stylesheet" type="text/css" href="css/snap.css" />
+			<link rel="stylesheet" media="screen and (max-width: 500px)" href="css/slick.css" type="text/css" />
+			<link rel="stylesheet" media="screen and (min-width: 500px)" href="css/slick1.css" type="text/css" />
+			<link rel="stylesheet" type="text/css" href="css/demo.css" />
+
+			<!-- JS 
+			<script src="cordova.js"></script>
+			<script src="cordova_plugins.js"></script>-->
+			
+			<script src="js/jquery.form.js"></script>
+			<script src="js/angular.js"></script>
+			<script src="js/angular-touch.js"></script>
+			<script src="js/angular-route.js"></script>
+			<script src="js/angular-animate.js"></script>
+			<script src="js/angular-sanitize.js"></script>
+			<script src="js/angular-local-storage.js"></script>
+			<script src="js/touchSwipe.js"></script>
+			<script src="js/script.js"></script>
+			<script src="js/slick.js"></script>
+			
+			<script type="text/javascript">
+				var avatarUrl = "";
+			//alert("starting app !!!");
+			var pushNotification;
+			document.addEventListener("deviceready", onDeviceReady, true);
+			function onDeviceReady() {
+				//checkConnection();
+				//alert("device is ready !!!");
+				pushNotification = window.plugins.pushNotification;
+				//alert(window.device.platform);
+				pushNotification.register(pushSuccessHandler, pushErrorHandler, {
+					"senderID" : "1004644618278", // Project number from Google Developer Console
+					"ecb" : "onNotificationGCM"
+				});
+			}
+
+			function pushSuccessHandler(result) {
+				//console.log(result);
+				//alert(result);
+			}
+
+			function pushErrorHandler(error) {
+				//console.log(error);
+				//alert(error);
+			}
+
+			var onNotificationGCM = function(e) {
+				// Check which event:
+				switch(e.event) {
+					case 'registered' : {
+						/*console.log('android reg id: ' + e.regid);
+						alert('DEVICE TOKEN : ' + e.regid);*/
+						deviceToken = e.regid;
+					}break;
+					case 'message':{
+						//alert(JSON.stringify(e));
+						pageId.inline = e.foreground;
+						pageId.id = Number(e.payload.origine);
+						redirection();
+						
+					}break;
+				}
+			}			
+			
+			</script>
+			
+			<style>
+				.menu_main {
+					height: 100%;
+					top: 0;
+					width: 100%;
+					position: absolute;
+					left: 0;
+					right: 0;
+					bottom: 0;
+					background: #ffffff;
+				}
+
+				.loader {
+					width: 50px;
+					height: 50px;
+					overflow: hidden;
+					position: absolute;
+					left: 50%;
+					margin-top: 40%;
+					margin-left: -25px;
+					z-index: 10000;
+				}
+
+				.loader img {
+					position: absolute;
+					width: 100%;
+					height: 100%;
+				}
+
+				.degrade {
+				}
+
+				a:link, a:active, a:hover, a:visited {
+					color: #000000;
+					text-decoration: none;
+				}
+				
+				.p_home {
+					background-image: url('pictos_menu/icone.svg'), none;
+				}
+				
+				.p_agenda {
+					background-image: url('pictos_menu/menu_agenda.png');
+				}
+				
+				.jour_menu {
+					width: 100%;
+					text-align: center;
+					font-size: 10px;
+					font-weight: bold;
+					color: #324043;
+					padding-top: 2px;
+				}
+				
+				.mois_menu {
+					width: 100%;
+					text-align: center;
+					font-size: 10px;
+					font-weight: bold;
+					color: #ffffff;
+					margin-top: 4px;
+				}
+				
+				.p_membres {
+					background-image: url('pictos_menu/reseau.svg'), none;
+				}
+				
+				.p_marque {
+					background-image: url('pictos_menu/marque.svg'), none;
+				}
+				
+				.p_galerie {
+					background-image: url('pictos_menu/galerie.svg'), none;
+				}
+				
+				.p_carriere {
+					background-image: url('pictos_menu/carriere.svg'), none;
+				}
+				
+				.p_contenu {
+					background-image: url('pictos_menu/cloud.svg'), none;
+				}
+				
+				.p_parametres {
+					background-image: url('pictos_menu/parametres.svg'), none;
+				}
+				
+				.modif_parametres {
+					display: block;
+					width: 80%;
+					padding: 0 5% 0 15%;
+					background: #e77e00;
+					color: #ffffff;
+					text-align: left;
+					text-decoration: none;
+				}
+				
+				@media screen and (max-width: 500px) {
+					.modif_parametres {
+						height: 30px;
+						line-height: 30px;
+	  				}
+  				}
+				
+				@media screen and (min-width: 501px) {
+					.modif_parametres {
+						height: 50px;
+						line-height: 50px;
+	  				}
+  				}
+				
+				.picto_modif_parametres {
+					position: absolute;
+					margin-top: 5px;
+					background-image: url('pictos_menu/parametres.svg');
+					background-repeat: no-repeat;
+					background-size: 100% 100%;
+				}
+				
+				@media screen and (max-width: 500px) {
+					.picto_modif_parametres {
+						width: 20px;
+						height: 20px;
+						margin-left: 5px;
+	  				}
+  				}
+				
+				@media screen and (min-width: 501px) {
+					.picto_modif_parametres {
+						width: 40px;
+						height: 40px;
+						margin-left: 0;
+	  				}
+  				}
+				
+				.label_modif_parametres {
+					display: inline;
+					color: #ffffff;
+					text-decoration: none;
+				}
+				
+				@media screen and (max-width: 500px) {
+					.label_modif_parametres {
+						margin-left: 40px;
+	  				}
+  				}
+				
+				@media screen and (min-width: 501px) {
+					.label_modif_parametres {
+						margin-left: 60px;
+	  				}
+  				}
+				
+				.deconnect #membres, .deconnect #marque, .deconnect #galerie, .deconnect #carriere, .deconnect #contenu, .deconnect #parametres {
+					opacity: 0.5;
+					pointer-events: none;
+				}
+				
+				.col_profil_left {
+					float: left;
+				}
+				
+				@media screen and (max-width: 500px) {
+					.col_profil_left {
+						width: 70px;
+	  				}
+  				}
+				
+				@media screen and (min-width: 501px) {
+					.col_profil_left {
+						width: 120px;
+	  				}
+  				}
+				
+				.col_profil_left img {
+					display: block;
+				}
+				
+				@media screen and (max-width: 500px) {
+					.col_profil_left img {
+						max-width: 70px;
+						max-height: 70px;
+						margin: 10px auto 0 auto;
+	  				}
+  				}
+				
+				@media screen and (min-width: 501px) {
+					.col_profil_left img {
+						max-width: 120px;
+						max-height: 120px;
+						margin: 20px auto 0 auto;
+	  				}
+  				}
+				
+				.sl_member{
+					border-bottom-color: #e77e00;
+				}
+				
+				.sl_event{
+					border-bottom-color: #e7e14b;
+				}
+				
+				.sl_marque{
+					border-bottom-color: #eb2259;
+				}
+				
+			</style>
+	</head>
+
+	<!-- apply our angular app -->
+	<body>
+		
+		<input type='text' style='display:none;' id='mySwipper' value='{{mySwiper.val}}'/>
+		<div class="snap-drawers">
+			<div class="snap-drawer snap-drawer-left {{connectClass}}" style='margin: 14px 14px 0 14px;'>
+				<div class='picto_d'>
+					<a href='#' onclick="reinit();"><!--<img src='pictos_menu/icone.svg'/>--><div class="pictomenu p_home"></div></a>
+				</div>
+				<div class='picto_d'>
+					<a href='#agenda' onclick="reinit();"><!--<img src='pictos_menu/menu_agenda.png'/>-->
+						<div class="pictomenu p_agenda">
+							<div class="jour_menu">{{root_jour}}</div>
+							<div class="mois_menu">{{root_mois}}</div>
+						</div>
+					</a>
+				</div>
+				<div class='picto_d'>
+					<a href='#membres' onclick="reinit();"><!--<img src='pictos_menu/reseau.svg'/>--><div class="pictomenu p_membres"></div></a>
+				</div>
+				<div class='picto_d'>
+					<a href='#marque' onclick="reinit();"><!--<img src='pictos_menu/marque.svg'/>--><div class="pictomenu p_marque"></div></a>
+				</div>
+				<div class='picto_d'>
+					<a href='#galerie' onclick="reinit();"><!--<img src='pictos_menu/galerie.svg'/>--><div class="pictomenu p_galerie"></div></a>
+				</div>
+				<div class='picto_d'>
+					<a href='#carriere' onclick="reinit();"><!--<img src='pictos_menu/carriere.svg'/>--><div class="pictomenu p_carriere"></div></a>
+				</div>
+				<div class='picto_d'>
+					<a href='#contenu' onclick="reinit();"><!--<img src='pictos_menu/cloud.svg'/>--><div class="pictomenu p_contenu"></div></a>
+				</div>
+				<div class='picto_d'>
+					<a href="#parametres" onclick="reinit();"><!--<img src='pictos_menu/parametres.svg'/>--><div class="pictomenu p_parametres"></div></a>
+				</div>
+			</div>
+			<div class="snap-drawer snap-drawer-right">
+				<div class="menu_main" ng-if='user_profil'>
+					<div class="head_detail_profil">
+						<div class="col_profil_left">
+							<div class="avatar_detail_profil" style='background-image: url("{{user_profil.avatar}}")'></div>
+							<img ng-if="isNotVide(user_profil.logo)" ng-src="{{user_profil.logo}}"/>
+						</div>
+						<div class="infos_detail_profil">
+							<div class="profil_detail_nom" ng-bind-html="escapedHtml(user_profil.nom + ' ' + user_profil.prenom)"></div>
+							<div class="profil_detail_societe" ng-bind-html="escapedHtml(user_profil.societe)"></div>
+							<div class="profil_detail_poste" ng-bind-html="escapedHtml(user_profil.poste)"></div>
+							<div class="profil_detail_dateentree">
+								{{user_profil.entree}}
+							</div>
+							<div class="profil_detail_domaine" ng-bind-html="user_profil.expertise"></div>
+						</div>
+					</div>
+					<div class="greenLine"></div>
+					<div class="profil_detail_fonction">Fonction au Club : <span ng-bind-html="escapedHtml(user_profil.fonction)"></span></div>
+					<div class="description_detail_profil" ng-bind-html="escapedHtml(user_profil.profil)"></div>
+					<div class="social_detail_profil">
+						<div class="item_social_profil" ng-if='user_profil.portable != ""'>
+							<a href='tel:{{getphone(user_profil.portable)}}'> <div class="item_social_picto p_phone" ></div>
+							<div class="item_social_url">
+								{{user_profil.portable}}
+							</div> </a>
+						</div>
+						<div class="item_social_profil" ng-if='user_profil.mail != ""'>
+							<a href='mailto:{{user_profil.mail}}'> <div class="item_social_picto p_mail"></div>
+							<div class="item_social_url">
+								{{user_profil.mail}}
+							</div> </a>
+						</div>
+						<div class="item_social_profil" ng-if='user_profil.linkedin != ""'>
+							<a ng-click='openUrl_s(user_profil.linkedin)'> <div class="item_social_picto p_link"></div>
+							<div class="item_social_url">
+								profil linkedin
+							</div> </a>
+						</div>
+						<div class="item_social_profil" ng-if='user_profil.twitter != ""'>
+							<a ng-click='openUrl_s(user_profil.twitter)'> <div class="item_social_picto p_twit"></div>
+							<div class="item_social_url">
+								profil twitter
+							</div> </a>
+						</div>
+						<div class="item_social_profil" ng-if='user_profil.facebook != ""'>
+							<a ng-click='openUrl_s(user_profil.facebook)'> <div class="item_social_picto p_fac"></div>
+							<div class="item_social_url">
+								profil facebook
+							</div> </a>
+						</div>
+					</div>
+					
+					<a href="#parametres" onclick="reinit();" class="modif_parametres">
+						<div class="picto_modif_parametres"></div>
+						<div class="label_modif_parametres">MODIFIER MES PARAMETRES</div>
+					</a>
+					
+					<div class="infosplus_detail_profil" ng-if='user_profil.status != ""'>
+					    <div class="item_infoplus_profil" ng-if='isNotVide(user_profil.activite)'>
+                            <b>DOMAINE D'ACTIVIT&Eacute; : </b><span ng-bind-html="escapedHtml(user_profil.activite)"></span>
+                        </div>
+                        <div class="item_infoplus_profil" ng-if='isNotVide(user_profil.expertise1) || isNotVide(user_profil.expertise2) || isNotVide(user_profil.expertise3) || isNotVide(user_profil.expertise4) || isNotVide(user_profil.expertise5)'>
+						    <b>DOMAINE(S) D'EXPERTISE : </b> 
+						    <span ng-if='isNotVide(user_profil.expertise1)' ng-bind-html="escapedHtml(user_profil.expertise1)"></span><span ng-if='isNotVide(user_profil.expertise1) && isNotVide(user_profil.expertise2)'>, </span>
+						    <span ng-if='isNotVide(user_profil.expertise2)' ng-bind-html="escapedHtml(user_profil.expertise2)"></span><span ng-if='isNotVide(user_profil.expertise2) && isNotVide(user_profil.expertise3)'>, </span>
+						    <span ng-if='isNotVide(user_profil.expertise3)' ng-bind-html="escapedHtml(user_profil.expertise3)"></span><span ng-if='isNotVide(user_profil.expertise3) && isNotVide(user_profil.expertise4)'>, </span>
+						    <span ng-if='isNotVide(user_profil.expertise4)' ng-bind-html="escapedHtml(user_profil.expertise4)"></span><span ng-if='isNotVide(user_profil.expertise4) && isNotVide(user_profil.expertise4)'>, </span>
+						    <span ng-if='isNotVide(user_profil.expertise5)' ng-bind-html="escapedHtml(user_profil.expertise5)"></span>
+						</div>
+						<div class="item_infoplus_profil" style="display:none;">
+							status : {{user_profil.status}}
+						</div>
+						<div class="item_infoplus_profil" ng-if='user_profil.partners != ""'>
+							<b>PARTENAIRES : </b><span ng-bind-html='escapedHtml(user_profil.partners)'></span>
+						</div>
+						<div class="item_infoplus_profil" ng-if='user_profil.parrain != ""'>
+							<b>PARRAIN : </b><span ng-bind-html='escapedHtml(user_profil.parrain)'></span>
+						</div>
+						<div class="item_infoplus_profil" ng-if='user_profil.clubs != ""'>
+							<b>AUTRES CLUBS : </b><span ng-bind-html='escapedHtml(user_profil.clubs)'></span>
+						</div>
+					</div>
+					
+				</div>
+				<div ng-if='!user' style='color:#fff;text-align: center;font-size: 20px;'>
+					{{erreur}}
+				</div>
+			</div>
+		</div>
+		<div id='content' class="snap-content">
+			<div ng-view class='page {{page_name}}'></div>
+			<!--<div class="webview " ng-show="media && media != ''">
+				<div class="back_video" ng-click="media = null;youtube = null; video = null;"></div>
+				<div class="iframe-responsive-wrapper">
+					<div ng-if="youtube">
+						<img class="iframe-ratio" src="data:image/gif;base64,R0lGODlhEAAJAIAAAP///wAAACH5BAEAAAAALAAAAAAQAAkAAAIKhI+py+0Po5yUFQA7"/>
+						<iframe width="560" height="315" ng-src="{{getUrl(media)}}" frameborder="0" allowfullscreen></iframe>
+					</div>
+					<div ng-if="video">
+						<video controls="controls">
+							<source ng-src="{{getUrl(media)}}" type="video/mp4" />
+						</video>
+					</div>
+				</div>
+			</div>-->
+			<div class="popup_note">
+			<div class="back_note" onclick="downNote();"></div>
+				<div class="middle_note">
+					<div class="note_star" id="1star" ng-click="note_value = '1'"></div>
+					<div class="note_star" id="2star" ng-click="note_value = '2'"></div>
+					<div class="note_star" id="3star" ng-click="note_value = '3'"></div>
+					<div class="submit_note" ng-click='noter(note_id,note_value)'></div>
+				</div>
+			</div>
+			
+		</div>
+		
+		<svg>
+			<filter id="flou">
+				<feGaussianBlur stdDeviation="20" />
+			</filter>
+		</svg>
+
+		<script type="text/javascript" src="js/snap.js"></script>
+		
+		<script type="text/javascript">
+			//console.log(localStorage.getItem('ls.tracking'));
+			var max_val = -((300*window.innerWidth)/(320));
+			var p_slide;
+		
+			var snapper = new Snap(
+			{
+				element : document.getElementById('content'),
+				maxPosition : 80,
+				minPosition : max_val
+			});
+
+			var op_l = 0;
+			var op_r = 0;
+
+			function openL()
+			{
+				if (op_l == '0')
+				{
+					snapper.open('left');
+					op_l = 1;
+					op_r = 0;
+				}
+				else
+				{
+					reinit();
+				}
+			}
+
+			function openR()
+			{
+				if (op_r == '0')
+				{
+					snapper.open('right');
+					closeAll();
+				}
+				else
+				{
+					reinit();
+				}
+			}
+
+			function closeAll()
+			{
+				op_r = 0;
+				op_l = 0;
+			}
+
+			function reinit()
+			{
+				snapper.close();
+				closeAll();
+			}
+
+			function load()
+			{
+				$('.year').html(new Date().getFullYear());
+			}
+
+
+			$(document).ready(function()
+			{
+				var i = 1;
+				p_slide = parseInt($('#mySwipper').val());
+				//$(".swipe_touch").addClass(((p_slide == 0)?"close":"open"));
+				setInterval(function()
+				{
+					$('.degrade').css('-webkit-transform', 'rotate(' + i + 'deg)');
+					$('.degrade').css('transform', 'rotate(' + i + 'deg)');
+					i = i + 2;
+					//alert(i);
+				}, 1);
+				
+				/*$(".webview").animate(
+						{
+							top : "0%"
+						}, 500, function()
+						{
+							// Animation complete.
+						});*/
+						
+				$(".back_video").click(function()
+				{
+					/*$(".webview").animate(
+						{
+							top : "0"
+						}, 500, function()
+						{
+							// Animation complete.
+						});*/
+
+				});
+				
+				$("#1star").click(function()
+				{
+					$(".note_star").css("opacity","0.2");
+					$("#1star").css("opacity","1");
+
+				});
+				
+				$("#2star").click(function()
+				{
+					$(".note_star").css("opacity","0.2");
+					$("#1star").css("opacity","1");
+					$("#2star").css("opacity","1");
+				});
+				
+				$("#3star").click(function()
+				{
+					$(".note_star").css("opacity","0.2");
+					$("#1star").css("opacity","1");
+					$("#2star").css("opacity","1");
+					$("#3star").css("opacity","1");
+				});
+
+				
+			});
+			
+			function downNote()
+			{
+				$('.view_content').removeClass('flou');
+				$(".popup_note").css('top','100%');
+				$(".popup_note").hide();
+			}
+			
+			function upNote()
+			{
+				$('.view_content').addClass('flou');
+				$(".popup_note").animate(
+				{
+					top : "0"
+				}, 500, function()
+				{
+					// Animation complete.
+				});
+			}
+			
+		</script>
+	</body>
+</html>

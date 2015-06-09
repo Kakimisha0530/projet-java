@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html class="ng-app:animateApp" id="ng-app" ng-app="animateApp">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+			
+			<!-- CSS -->
+			<link rel="stylesheet" type="text/css" href="css/style.css" />
+			<link rel="stylesheet" type="text/css" href="css/style2.css" />
+			<link rel="stylesheet" type="text/css" href="css/snap.css" />
+			<link rel="stylesheet" type="text/css" href="css/slick.css" />
+			<link rel="stylesheet" type="text/css" href="css/demo.css" />
+			
+
+			<!-- JS -->			
+			<script src="js/jquery.min.js"></script>
+			<script src="js/jquery.form.js"></script>
+			<script src="js/angular.js"></script>
+			<script src="js/angular-touch.js"></script>
+			<script src="js/angular-route.js"></script>
+			<script src="js/angular-animate.js"></script>
+			<script src="js/angular-sanitize.js"></script>
+			<script src="js/angular-local-storage.js"></script>
+			<script src="js/touchSwipe.js"></script>
+			<script src="js/script.js"></script>
+			<script src="js/slick.js"></script>
+			<script src="js/datepicker_bis.js"></script>
+			
+			
+			<style>
+				.menu_main {
+					height: 100%;
+					top: 0;
+					width: 100%;
+					position: absolute;
+					left: 0;
+					right: 0;
+					bottom: 0;
+					background: #ffffff;
+				}
+				
+				.loader {
+					width: 50px;
+					height: 50px;
+					overflow: hidden;
+					position: absolute;
+					left: 50%;
+					margin-top: 40%;
+					margin-left: -25px;
+					z-index: 10000;
+				}
+				
+				.loader img {
+					position: absolute;
+					width: 100%;
+					height: 100%;
+				}
+				
+				.degrade {
+					
+				}
+				
+				a:link, a:active, a:hover, a:visited {
+					color: #000000;
+					text-decoration: none;
+				}
+				
+				.p_home {
+					background-image: url('pictos_menu/icone.svg'), none;
+				}
+				
+				.p_agenda {
+					background-image: url('pictos_menu/menu_agenda.png');
+				}
+				
+				.jour_menu {
+					width: 100%;
+					text-align: center;
+					font-size: 10px;
+					font-weight: bold;
+					color: #324043;
+					padding-top: 2px;
+				}
+				
+				.mois_menu {
+					width: 100%;
+					text-align: center;
+					font-size: 10px;
+					font-weight: bold;
+					color: #ffffff;
+					margin-top: 4px;
+				}
+				
+				.p_disconnect {
+					background-image: url('pictos_menu/signout.png'), none;
+				}
+				
+				.p_parametres {
+					background-image: url('pictos_menu/parametres.svg'), none;
+				}
+				
+				.modif_parametres {
+					display: block;
+					width: 80%;
+					padding: 0 5% 0 15%;
+					background: #e77e00;
+					color: #ffffff;
+					text-align: left;
+					text-decoration: none;
+				}
+				
+				@media screen and (max-width: 500px) {
+					.modif_parametres {
+						height: 30px;
+						line-height: 30px;
+					}
+				}
+				
+				@media screen and (min-width: 501px) {
+					.modif_parametres {
+						height: 50px;
+						line-height: 50px;
+					}
+				}
+				
+				.picto_modif_parametres {
+					position: absolute;
+					margin-top: 5px;
+					background-image: url('pictos_menu/parametres.svg');
+					background-repeat: no-repeat;
+					background-size: 100% 100%;
+				}
+				
+				@media screen and (max-width: 500px) {
+					.picto_modif_parametres {
+						width: 20px;
+						height: 20px;
+						margin-left: 5px;
+					}
+				}
+				
+				@media screen and (min-width: 501px) {
+					.picto_modif_parametres {
+						width: 40px;
+						height: 40px;
+						margin-left: 0;
+					}
+				}
+				
+				.label_modif_parametres {
+					display: inline;
+					color: #ffffff;
+					text-decoration: none;
+				}
+				
+				@media screen and (max-width: 500px) {
+					.label_modif_parametres {
+						margin-left: 40px;
+					}
+				}
+				
+				@media screen and (min-width: 501px) {
+					.label_modif_parametres {
+						margin-left: 60px;
+					}
+				}
+				
+				.deconnect #membres, .deconnect #marque, .deconnect #galerie, .deconnect #carriere,
+					.deconnect #contenu, .deconnect #parametres {
+					opacity: 0.5;
+					pointer-events: none;
+				}
+				
+				.col_profil_left {
+					float: left;
+				}
+				
+				@media screen and (max-width: 500px) {
+					.col_profil_left {
+						width: 70px;
+					}
+				}
+				
+				@media screen and (min-width: 501px) {
+					.col_profil_left {
+						width: 120px;
+					}
+				}
+				
+				.col_profil_left img {
+					display: block;
+				}
+				
+				@media screen and (max-width: 500px) {
+					.col_profil_left img {
+						max-width: 70px;
+						max-height: 70px;
+						margin: 10px auto 0 auto;
+					}
+				}
+				
+				@media screen and (min-width: 501px) {
+					.col_profil_left img {
+						max-width: 120px;
+						max-height: 120px;
+						margin: 20px auto 0 auto;
+					}
+				}
+				
+				.sl_member {
+					border-bottom-color: #e77e00;
+				}
+				
+				.sl_event {
+					border-bottom-color: #e7e14b;
+				}
+				
+				.sl_marque {
+					border-bottom-color: #eb2259;
+				}
+				
+				.item_label {
+					margin: -10px 0 10px 50px;
+				  top: 45px;
+				  left: 40px;
+				  color: #fff;
+				  font-size: 13px;
+				}
+				
+				.item_label li {
+					height: 10px;
+					width:100px;
+  					padding: 10px;
+  					-webkit-border-radius: 30px;
+  					border-radius: 30px;
+				}
+				
+				.picto_d a {
+					color: #fff !important;
+					text-align: center;
+					font-size: 13px;
+					font-weight: bold;
+					position: absolute;
+					left: 50px;
+					top: 20px;
+				}
+				li.selec{
+					background: #fff;
+					color: #000;
+				}
+				
+				.picto6{
+				  background-size: 100% auto;
+				  }
+		</style>
+	</head>
+
+	<!-- apply our angular app -->
+	<body>
+		
+		<div class="snap-drawers">
+			<div class="snap-drawer snap-drawer-left" style='margin: 14px 14px 0 14px;'>
+				<div class='picto_d'>
+					<a href='#' ng-click="open('/');" onclick="reinit();"><span>AGENDA</span></a>			
+					<div class="pictomenu p_agenda" ng-click="open('/');" onclick="reinit();">
+						<div class="jour_menu">{{root_jour}}</div>
+						<div class="mois_menu">{{root_mois}}</div>
+					</div>					
+				</div>
+				<div class="item_label">						
+						<ul>
+							<li class="{{agenda_mode.jour?'selec':''}}" ng-click="changeview('jour');" onclick="reinit();">Jour</li>
+							<!-- li class="{{agenda_mode.semaine?'selec':''}}" ng-click="changeview('semaine');open('/');"onclick="reinit();">Semaine</li -->
+							<li class="{{agenda_mode.mois?'selec':''}}" ng-click="changeview('mois');" onclick="reinit();">Mois</li>
+						</ul>					
+					</div>	
+				<div class='picto_d'>
+					<a href='#' onclick="reinit();"><span>PARAMETRES</span></a>			
+					<div class="pictomenu p_parametres"></div>
+				</div>
+				<div class='picto_d'>
+					<a href='#' ng-click="disc();" onclick="reinit();"><span>DECONNEXION</span></a>			
+					<div class="pictomenu p_disconnect"></div>	
+				</div>
+			</div>
+		</div>
+		<div id='content' class="snap-content" data-snap-ignore=true>
+			<div ng-view class='page {{page_name}}'></div>			
+		</div>
+		<script type="text/javascript" src="js/snap.js"></script>
+		
+		<script type="text/javascript">
+			//console.log(localStorage.getItem('ls.tracking'));
+			var max_val = -((300*window.innerWidth)/(320));
+			var p_slide;
+		
+			var snapper = new Snap(
+			{
+				element : document.getElementById('content'),
+				maxPosition : 200
+				//minPosition : max_val
+			});
+
+			var op_l = 0;
+			var op_r = 0;
+
+			function openL()
+			{
+				if (op_l == '0')
+				{
+					snapper.open('left');
+					op_l = 1;
+					op_r = 0;
+				}
+				else
+				{
+					reinit();
+				}
+			}
+
+			function openR()
+			{
+				if (op_r == '0')
+				{
+					snapper.open('right');
+					closeAll();
+				}
+				else
+				{
+					reinit();
+				}
+			}
+
+			function closeAll()
+			{
+				op_r = 0;
+				op_l = 0;
+			}
+
+			function reinit()
+			{
+				snapper.close();
+				closeAll();
+			}
+
+			function load()
+			{
+				$('.year').html(new Date().getFullYear());
+			}
+
+
+			$(document).ready(function()
+			{
+				var i = 1;
+				p_slide = parseInt($('#mySwipper').val());
+				$("div#erreurs > p , div#infos > p").click(function(){
+					$(this).remove();
+				});
+				//localStorage.setItem('ls.mode', JSON.stringify({jour:false,semaine:false,mois:true,view:"mois"}));
+				/*$(".header").css("background-color",usercolor + "!important");
+				$(".select_box").css("background-color",usercolor + "!important");
+				$(".select_box").css("border","1px solid " + usercolor + "!important");
+				$(".snap-drawers").css("background-color",usercolor);
+				$(".calendar td.btnPrev a , .calendar td.btnNext a").css("background-color",usercolor);
+				$(".calendar td.labelDay").css("color",usercolor);
+				$(".calendar td.today a").css("background",usercolor);*/
+			});
+			
+			
+		</script>
+	</body>
+</html>

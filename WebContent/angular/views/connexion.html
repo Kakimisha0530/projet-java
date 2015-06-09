@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<!--<link rel="stylesheet" type="text/css" id="dyn"/>-->
+		<script>
+			//$("link#dyn").attr("href", "css_pages/" + ((larg < 500)?"width_inf":"width_sup")+ "/connexion.css");
+			//$("script#dynJS").attr("src", "js_pages/" + ((larg < 500)?"width_inf":"width_sup")+ "/connexion.js");
+			/*{
+				rel : "stylesheet",
+				type : "text/css",
+				href : 
+			}).appendTo("head");*/
+		</script>
+		<!--<script>
+			$("<link/>", {
+				rel : "stylesheet",
+				type : "text/css",
+				href : "css_pages/" + ((larg < 500)?"width_inf":"width_sup")+ "/connexion.css"
+			}).appendTo("head");
+		</script>-->
+		<link rel="stylesheet" media="screen and (max-width: 500px)" href="css_pages/width_inf/connexion.css" type="text/css" />
+		<link rel="stylesheet" media="screen and (min-width: 501px)" href="css_pages/width_sup/connexion.css" type="text/css" />
+	</head>
+
+	<body>
+
+		<div class="white"></div>
+
+		<div class="page page-connexion" data-snap-ignore='true'>
+
+			<!--<div class="row logo brand">
+				<img src="images/connect/fleur_club.png">
+			</div>-->
+			
+			<div class="row logo brand">
+				<img src="images/connect/fleur_club.png">
+			</div>
+			
+			<div class='error' ng-if='!connect'>
+			</div>
+			
+			<div class="cache_loader_connect" ng-show='loading'>
+				<div class="loader">
+					<img src="images/loader.gif" ng-show='loading'/>
+				</div>
+			</div>
+			
+			<div class="row form">
+				<form>
+					<div>
+						<input type="email" placeholder="Login" required="required" ng-model='user.email'>
+					</div>
+					<div>
+						<input type="password" placeholder="Mot de passe" required="required" ng-model='user.code'>
+					</div>
+					<div>
+						<input type="submit" value="CONNEXION" ng-click='connect(user)'>
+					</div>
+				</form>
+			</div>
+			
+			<div class="row baseline brand_line">
+				<img src="images/connect/logo_connect_club.png">
+			</div>
+			
+			<div class="row picto_info_connect" onclick="upInfo()"></div>
+			
+			<!--<div class="row picto_info_connect" onclick="upInfo()"></div>-->
+			
+		</div>
+		
+		<div class="popup_info">
+			<div class="back_info" onclick="downInfo();"></div>
+				<div class="text_info">
+Membre du Club des Annonceurs : Créez du lien, consultez le programme des événements et gardez une marque d’avance !<br><br>
+<b>Avec votre application du Club des Annonceurs :</b><br>
+<ul>
+<li>Gérez facilement votre agenda, visualisez les membres déjà inscrits et communiquez avec eux.</li>
+<li>Visualisez les études et les évènements passés, en photos, vidéos et en compte-rendu, puis participez via un système de notations et de commentaires.</li>
+<li>Découvrez des contenus exclusifs créés pour l’appli sur des veilles internationales, ou des points de vue de contributeurs experts, en texte, en vidéo et…en format audio !</li>
+<li>Faites connaissance avec les nouveaux membres.</li>
+<li>Renforcez vos liens entre membres, grâce à l’annuaire de l’appli, via plusieurs interfaces, mail, sms, et leurs réseaux sociaux dont Linkedin.</li>
+<li>Boostez votre carrière avec les contacts des cabinets de recrutement partenaires du Club.</li>
+<li>Partagez vos CV et ceux des personnes que vous recommandez (assistants, stagiaires,…) auprès du réseau du Club.</li>
+</ul>
+<br>
+<b>Le club 100% annonceurs en quelques mots :</b><br>
+<ul>
+<li>Un réseau professionnel puissant, 100% annonceurs.</li>
+<li>170 directeurs marketing et/ou communication.</li>  
+<li>110 entreprises de premier plan.</li>
+<li>Un véritable « think tank » pour anticiper les évolutions du marché et l’avenir des métiers de la communication et du marketing.</li>
+<li>Des ateliers métier ou carrière opérationnels, animés par des experts et des annonceurs.</li>
+<li>Des diners-débats avec des personnalités de premier plan.</li>
+<li>Des moments plus festifs et networking : soirée, garden-party, voyage…</li>
+<li>Des études défricheuses de tendances.</li>
+<li>Des partenariats avec les instances référentes de la profession ainsi que les évènements clefs de la profession</li>
+</ul>
+<br><br>
+Cette application est réservée aux membres du Club des Annonceurs. Retrouvez les modalités d’inscription et toutes autres informations complémentaires sur le site internet : 
+<br><br>
+http://www.leclubdesannonceurs.com/fr/le-club-1966/vocation
+<br><br>
+contact@leclubdesannonceurs.com
+
+				</div>
+			</div>
+		
+		
+	</body>
+	
+	<script type="text/javascript" id="dynJS" src="js_pages/width_inf/connexion.js"></script>
+
+</html>

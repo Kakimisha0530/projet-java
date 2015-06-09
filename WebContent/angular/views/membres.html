@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<!--<link rel="stylesheet" type="text/css" id="dyn"/>-->
+		<script>
+			//$("link#dyn").attr("href", "css_pages/" + ((larg < 500)?"width_inf":"width_sup")+ "/membres.css");
+			//$("script#dynJS").attr("src", "js_pages/" + ((larg < 500)?"width_inf":"width_sup")+ "/membres.js");
+			/*{
+				rel : "stylesheet",
+				type : "text/css",
+				href : 
+			}).appendTo("head");*/
+		</script>
+		<link rel="stylesheet" media="screen and (max-width: 500px)" href="css_pages/width_inf/membres.css" type="text/css" />
+		<link rel="stylesheet" media="screen and (min-width: 501px)" href="css_pages/width_sup/membres.css" type="text/css" />
+	</head>
+	<body>
+
+		<div class="white"></div>
+
+		<div class="view_content">
+
+			<div class="header">
+				<div class="btn_panel_left" onclick="openL();"></div>
+				<div class="rub">
+					notre réseau
+				</div>
+				<div class="btn_panel_right" style="background-image: url('{{user_profil.avatar}}')" onclick="openR();"></div>
+			</div>
+			<div class="slider" data-snap-ignore="true">
+				<div ng-include='"views/slider.html"'></div>
+			</div>
+			<div class="swipe_button">
+				<div class="swipe_touch {{mySwiper.class}}" ng-click='up()'></div>
+			</div>
+			<div class="search">
+				<select class="select_left" ng-model='exp' ng-change="filtrerExp()">
+                    <option value="">Domaines d'expertise</option>
+                    <option ng-repeat='val in expertises' value="{{val.id}}" ng-bind-html='val.titre'></option>
+                </select>
+				<input type="text" name="fname" class="formtext_right" ng-model='search' placeholder="nom, société, fonction">
+			</div>
+
+			<div class="cache_loader" ng-show='loading'>
+				<div class="loader">
+					<img src="images/loader.gif" ng-show='loading'/>
+				</div>
+			</div>
+
+			<div class="main">
+			    <div ng-if='_is_connected'>
+    				<div class="main_left">
+    					<div class="wrap_list" ng-repeat="membre in usersList | filter:search">
+    						<div id='{{membre.first}}'>
+    							<div class="line5 {{membre._class}}" ng-click='member(membre.mail,membre.id)'>
+    								<div class="picto5">
+    									<div class="avatar5" style="background-image: url('{{membre.avatar}}');"></div>
+    								</div>
+    								<div class="texte5">
+    									<div class="texte_content5">
+    										<div class="profil_item_nom" ng-bind-html="escapedHtml(membre.nom + ' ' + membre.prenom)"></div>
+    										<div class="profil_item_societe" ng-bind-html="escapedHtml(membre.societe)"></div>
+    										<div class="profil_item_poste" ng-bind-html="escapedHtml(membre.poste)"></div>
+    									</div>
+    								</div>
+    							</div>
+    						</div>
+    					</div>
+    				</div>
+				</div>
+				<div ng-if='!_is_connected'>
+                    <div class="spacer"> </div>
+                    <div ng-include='"views/hors-ligne.html"'></div>
+                </div>
+			</div>
+			<div class="main_right_bis">
+				<div class="click_letters">
+					<div ng-click='lister("a")'>
+						a
+					</div>
+					<!--<div ng-click='lister("b")'>
+					b
+					</div>-->
+					<div ng-click='lister("c")'>
+						c
+					</div>
+					<!--<div ng-click='lister("d")'>
+					d
+					</div>-->
+					<div ng-click='lister("e")'>
+						e
+					</div>
+					<!--<div ng-click='lister("f")'>
+					f
+					</div>-->
+					<div ng-click='lister("g")'>
+						g
+					</div>
+					<!--<div ng-click='lister("h")'>
+					h
+					</div>-->
+					<div ng-click='lister("i")'>
+						i
+					</div>
+					<!--<div ng-click='lister("j")'>
+					j
+					</div>-->
+					<div ng-click='lister("k")'>
+						k
+					</div>
+					<!--<div ng-click='lister("l")'>
+					l
+					</div>-->
+					<div ng-click='lister("m")'>
+						m
+					</div>
+					<!--<div ng-click='lister("n")'>
+					n
+					</div>-->
+					<div ng-click='lister("o")'>
+						o
+					</div>
+					<!--<div ng-click='lister("p")'>
+					p
+					</div>-->
+					<div ng-click='lister("q")'>
+						q
+					</div>
+					<!--<div ng-click='lister("r")'>
+					r
+					</div>-->
+					<div ng-click='lister("s")'>
+						s
+					</div>
+					<!--<div ng-click='lister("t")'>
+					t
+					</div>-->
+					<div ng-click='lister("u")'>
+						u
+					</div>
+					<!--<div ng-click='lister("v")'>
+					v
+					</div>-->
+					<div ng-click='lister("w")'>
+						w
+					</div>
+					<!--<div ng-click='lister("x")'>
+					x
+					</div>-->
+					<div ng-click='lister("y")'>
+						y
+					</div>
+					<!--<div ng-click='lister("z")'>
+					z
+					</div>-->
+				</div>
+			</div>
+
+			<div class="switch">
+				<div class='fixe'>
+					<div class="btn_filactu">
+							vous connaissez-vous ?
+					</div>
+					<div class="btn_agenda" ng-click='partners()'>
+							qui travaille avec qui ?
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+	</body>
+	
+	<script type="text/javascript" id="dynJS" src="js_pages/width_inf/membres.js"></script>
+
+</html>

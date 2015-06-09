@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+    	<!--<link rel="stylesheet" type="text/css" id="dyn"/>-->
+		<script>
+			//$("link#dyn").attr("href", "css_pages/" + ((larg < 500)?"width_inf":"width_sup")+ "/carriere_agence.css");
+			//$("script#dynJS").attr("src", "js_pages/" + ((larg < 500)?"width_inf":"width_sup")+ "/carriere_agence.js");
+			/*{
+				rel : "stylesheet",
+				type : "text/css",
+				href : 
+			}).appendTo("head");*/
+		</script>
+		<!--<script>
+			$("<link/>", {
+				rel : "stylesheet",
+				type : "text/css",
+				href : "css_pages/" + ((larg < 500)?"width_inf":"width_sup")+ "/carriere_agence.css"
+			}).appendTo("head");
+		</script>-->
+		<link rel="stylesheet" media="screen and (max-width: 500px)" href="css_pages/width_inf/carriere_agence.css" type="text/css" />
+		<link rel="stylesheet" media="screen and (min-width: 501px)" href="css_pages/width_sup/carriere_agence.css" type="text/css" />
+    </head>
+
+    <body>
+
+        <div class="header">
+            <div class="btn_panel_left" onclick='openL();'></div>
+            <div class="rub">
+                carrière
+            </div>
+            <div class="btn_panel_right" style='background-image: url("{{user_profil.avatar}}")' onclick='openR();' ></div>
+        </div>
+        <div class="slider" data-snap-ignore="true">
+            <div ng-include='"views/slider.html"'></div>
+        </div>
+        <div class="swipe_button">
+            <div class="swipe_touch {{mySwiper.class}}" ng-click='up()'></div>
+        </div>
+
+        <div class="cache_loader" ng-show='loading'>
+            <div class="loader">
+                <img src="images/loader.gif" ng-show='loading'/>
+            </div>
+        </div>
+
+        <div class="main">
+            <div ng-if='_is_connected'>
+                <div class="spacer"></div>
+                <div class="wrap" ng-repeat='val in cabs'>
+                    <div class="line3" onclick="seeText($(this));" data-titre="{{val.titre}}">
+                        <div class="texte3">
+                            <div class="texte_content3">
+                                <div class="agence" ng-bind-html='val.titre'></div>
+                                <div class="text_contact">
+                                    Contact Club des Annonceurs :
+                                </div>
+                                <div class="contact_agence" ng-bind-html='escapedHtml(val.contributeur)'></div>
+                            </div>
+                        </div>
+                        <div class="picto3" style="background-image: url('{{val.photo}}');"></div>
+                    </div>
+                    <div class="between3" ng-bind-html='escapedHtml(val.texte)'></div>
+                    <div class="list_between">
+                        <div class="list_membres {{gNum(ind)}}" ng-repeat='(ind,membre) in val.assoc'>
+                            <div class="liste_item">
+                                <!--<a ng-click="seeprofil(membre.id,membre.mail)">
+
+                                </a>-->
+                                <div class="picto_avatar" style='background-image: url("{{getAvatar(membre)}}");'></div>
+                                <div class="membre_titre" ng-bind-html='escapedHtml(membre.nom + " " + membre.prenom)'></div>
+                                <div class="membre_societe ng-binding" ng-bind-html="escapedHtml(membre.societe)"></div>
+                                <a href="tel:{{membre.portable}}" ng-if='membre.portable != ""'><div class="picto_phone"></div></a>
+                                <a href="mailto:{{membre.mail}}" ng-if='membre.mail != ""'><div class="picto_mail"></div></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="base_line3">
+                        <div class="btn_membres" onclick='showMembres($(this).parent());'></div>
+                        <div class='count_assoc'>
+                            {{val.associes}}
+                        </div>
+                        <div class="contacts_a">
+                            <a ng-if='val.phone != ""' href="tel:{{val.phone}}"><div class="picto_phone"></div></a>
+                            <a ng-if='val.mail != ""' href="mailto:{{val.mail}}"><div class="picto_mail"></div></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="spacer"></div>
+                <div class="suite" ng-if="suite" ng-click='charger();'>
+                    <div class="suite_texte">Voir la suite</div>
+                </div>
+                <div class="spacer"></div>
+                <div ng-if='!_is_connected'>
+                    <div class='spacer'></div>
+                    <div ng-include='"views/hors-ligne.html"'></div>
+                </div>
+            </div>
+        </div>
+        <div class="switch">
+            <div class="btn_agenda"  ng-click="open(1);">
+                CVth&egrave;que
+            </div>
+            <div class="btn_filactu">
+                Cabinets de recrutements
+            </div>
+        </div>
+
+    </body>
+	
+	<script type="text/javascript" id="dynJS" src="js_pages/width_inf/carriere_agence.js"></script>
+
+</html>

@@ -1,0 +1,145 @@
+<div ng-controller='sliderCtrl'>
+	<div class="autoplay slider-slick" id='news'>
+		<div class='sl sl_member'>
+			<div class='test test1'>
+				<div ng-if='slide_membre.type == "default"' ng-bind-html="slide_membre.texte"></div>
+				<div ng-if='slide_membre.type != "default"'>
+				
+						<div class="content_slider" ng-click='member(slide_membre.mail,slide_membre.id)'>
+							
+								<div class="avatar_sildermember" style="background-image: url('{{slide_membre.avatar}}');"></div>
+								<div class="avatar_plus"></div>
+							
+							
+								<div class="text_silder_member">
+									<div class="sildermember_item_nom">nouveau membre</div>
+									<div class="sildermember_item_societe" ng-bind-html="slide_membre.prenom + ' ' + slide_membre.nom"></div>
+									<div class="sildermember_item_poste" ng-bind-html="slide_membre.societe"></div>
+									<!--<div class="" ng-bind-html="slide_membre.activite"></div>-->
+								</div>
+							
+						</div>
+				
+				</div>
+			</div>
+		</div>
+		<div class='sl sl_event {{slide_event1.affiche}}' >
+			<div class='test test2'>
+				<div ng-if='slide_event1.type == "default"' ng-bind-html="slide_event1.texte"></div>
+				<div ng-if='slide_event1.type != "default"'>
+					<div class="content_slider cate{{slide_event1.categorieId}}" ng-click='seeEvent(slide_event1.id)'>
+						<div class="">
+							<div class="text_silder">
+								<div class="slider_event" ng-bind-html='slide_event1.categorie'></div>
+								<div class="slider_titre_event" ng-bind-html='slide_event1.titre'></div>
+								<div class="slider_org_event" ng-bind-html='slide_event1.lieu'></div>
+							</div>
+						</div>
+						<div class="date_content_slider">
+							<div class="mois_slider">
+								{{getMois(slide_event1.debut)}}
+							</div>
+							<div class="year_slider" style="color:#000000!important;">
+								{{getJour(slide_event1.debut)}}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class='sl sl_event {{slide_event2.affiche}}' >
+			<div class='test test2'>
+				<div ng-if='slide_event2.type == "default"' ng-bind-html="slide_event2.texte"></div>
+				<div ng-if='slide_event2.type != "default"'>
+					<div class="content_slider cate{{slide_event2.categorieId}}" ng-click='seeEvent(slide_event2.id)'>
+						<div class="">
+							<div class="text_silder">
+								<div class="slider_event" ng-bind-html='slide_event2.categorie'></div>
+								<div class="slider_titre_event" ng-bind-html='slide_event2.titre'></div>
+								<div class="slider_org_event" ng-bind-html='slide_event2.lieu'></div>
+							</div>
+						</div>
+						<div class="date_content_slider">
+							<div class="mois_slider">
+								{{getMois(slide_event2.debut)}}
+							</div>
+							<div class="year_slider" style="color:#000000!important;">
+								{{getJour(slide_event2.debut)}}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class='sl sl_marque {{slide_doc1.affiche}}' >
+			<div class='test test3'>
+				<div ng-if='slide_doc1.type == "default"' ng-bind-html="slide_doc1.texte"></div>
+				<div class="content_slider" ng-if='slide_doc1.type != "default"'>
+					<div class="pictomarque_sildermember"></div>
+					<div class="text_silder_marque cate{{slide_doc1.categorieId}}" ng-click='seeDoc(slide_doc1.id)'>
+						<div class="picto" style="display:none;">
+							{{slide_doc1.vignette}}
+						</div>
+						<div class="titre_slider_marque" ng-bind-html='slide_doc1.titre'></div>
+						<div class="contributeur_slider_marque">
+							Par <span ng-bind-html='slide_doc1.contributeur'></span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class='sl sl_marque {{slide_doc2.affiche}}' >
+			<div class='test test3'>
+				<div ng-if='slide_doc2.type == "default"' ng-bind-html="slide_doc2.texte"></div>
+				<div class="content_slider" ng-if='slide_doc2.type != "default"'>
+					<div class="pictomarque_sildermember"></div>
+					<div class="text_silder_marque cate{{slide_doc2.categorieId}}" ng-click='seeDoc(slide_doc2.id)'>
+						<div class="picto" style="display:none;">
+							{{slide_doc2.vignette}}
+						</div>
+						<div class="titre_slider_marque" ng-bind-html='slide_doc2.titre'></div>
+						<div class="contributeur_slider_marque">
+							Par <span ng-bind-html='slide_doc2.contributeur'></span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+    $(document).ready(function() {
+        //alert($('.drop').attr('class'));
+        var slide_droped = ($('.drop').attr('class') != undefined && $('.drop').attr('class') != "") || ($('.else').attr('class') != undefined && $('.else').attr('class') != "");
+        $('.autoplay').css("display","none");
+
+        setInterval(function() {
+            slide_droped = ($('.drop').attr('class') != undefined && $('.drop').attr('class') != "") || ($('.else').attr('class') != undefined && $('.else').attr('class') != "");
+            if (slide_droped) {
+                //alert($('.drop').attr('class'));
+                $('.drop').remove();
+                clearInterval(this);
+                $('.autoplay').css("display","block");
+                var myslider = $('.autoplay'
+					);
+					myslider.slick({
+						slidesToShow : 1,
+						slidesToScroll : 1,
+						autoplay : true,
+						autoplaySpeed : 5000,
+						arrows : true,
+						onAfterChange : function(e) {
+							if (!$(".sl:eq(" + (e.currentSlide + 1) + ")").hasClass("slick-cloned") && $(".sl:eq(" + (e.currentSlide + 1) + ")").hasClass("slick-active")) {
+								//console.log(e.currentSlide + " : " + $(".sl:eq(" + (e.currentSlide + 1) + ")").attr("class"));
+								var color = $(".sl:eq(" + (e.currentSlide + 1) + ")").css('border-bottom-color');
+								$('.swipe_touch').css('background-color', color);
+								$('.swipe_button').css('border-top-color', color);
+								$('.home_main').css('border-top-color', color);
+							}
+						}
+					});
+					}
+					}, 1000);
+
+					}); 
+</script>

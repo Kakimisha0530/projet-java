@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+        <meta charset="UTF-8">
+        <!--<link rel="stylesheet" type="text/css" id="dyn"/>-->
+		<script>
+			//$("link#dyn").attr("href", "css_pages/" + ((larg < 500)?"width_inf":"width_sup")+ "/home.css");
+			//$("script#dynJS").attr("src", "js_pages/" + ((larg < 500)?"width_inf":"width_sup")+ "/home.js");
+			/*{
+				rel : "stylesheet",
+				type : "text/css",
+				href : 
+			}).appendTo("head");*/
+		</script>
+		<!--<script>
+			$("<link/>", {
+				rel : "stylesheet",
+				type : "text/css",
+				href : "css_pages/" + ((larg < 500)?"width_inf":"width_sup")+ "/home.css"
+			}).appendTo("head");
+		</script>-->
+            <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+            
+			<link rel="stylesheet" media="screen and (max-width: 500px)" href="css_pages/width_inf/home.css" type="text/css" />
+			<link rel="stylesheet" media="screen and (min-width: 501px)" href="css_pages/width_sup/home.css" type="text/css" />
+    </head>
+    
+    <body data-snap-ignore="true">
+    
+    <div class="white"></div>
+    
+    <div class="view_content">
+    
+    	<div class="prev_header"></div>
+        <div class="logoFixeHome"></div>
+        <div class="slider" ng-include='"views/slider-home.html"' data-snap-ignore="true"></div>
+        
+        <div class="main home_main">
+        	<div class="loader">
+					<!--<img class="degrade" src="images/loader/degrade.png"/>
+					<img src="images/loader/cache.png"/>-->
+					<img src="images/loader.gif" ng-show='loading'/>
+				</div>
+            <div class="line_home l1">
+            	<div class="agenda" ng-click="open('agenda')">
+                	<div class="pushpicto"></div>
+                	<div class="date_content_home">
+                		<div class="jour_home">{{root_jour}}</div>
+						<div class="mois_home">{{root_mois}}</div>
+					</div>
+					<div class="titre">agenda</div>
+            	</div>
+                <div class="reseau" ng-click="open('membres')">
+               		<div class="pushpicto"></div>
+               		<div class="titre">notre réseau</div>
+               	</div>
+            </div>
+            <div class="line_home l2">
+                <div class="marque" ng-click="open('marque')">
+                	<div class="pushpicto"></div>
+                	<div class="titre">une marque<br />d'avance</div>
+                </div>
+                <div class="carriere" ng-click="open('carriere')"><div class="titre">carrière</div></div>
+            </div>
+            <div class="line_home l4">
+                <a href='#' onclick='openR();'><div class="profil"><div class="picto_min"><img ng-src="{{user_profil.avatar}}"></div><div class="titre_min">profil</div></div></a>
+                <div class="linkedin" ng-click='tracePage(50,"linkedin club",true);openUrl("http://www.linkedin.com/groups/Club-Annonceurs-56330/about")'><div class="titre_min">linkedin</div><div class="picto_min"><img src="images/picto_linkedin.png"></div></div>
+                <div class="galerie" ng-click="open('galerie')"><div class="titre">y étiez vous ?</div></div>
+                <div class="contenu" ng-click="open('contenu')">
+                	<div class="pushpicto"></div>
+                	<div class="titre">nos contenus</div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+	<script>
+		$(document).ready(function(){
+			alert(localStorage.getItem("ls.lastest"));
+		var tmp_lastest = JSON.parse(localStorage.getItem("ls.lastest"));
+			if(tmp_lastest.content.vue)
+				{$(".contenu .pushpicto").css("visibility","hidden");}
+			if(tmp_lastest.event.vue)
+				{$(".agenda .pushpicto").css("visibility","hidden");}
+			if(tmp_lastest.membre.vue)
+				{$(".reseau .pushpicto").css("visibility","hidden");}
+			if(tmp_lastest.doc.vue)
+				{$(".marque .pushpicto").css("visibility","hidden");}
+		});
+	</script>
+        
+    </body>
+</html>

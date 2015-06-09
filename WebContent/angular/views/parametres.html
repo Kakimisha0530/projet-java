@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+    	<!--<link rel="stylesheet" type="text/css" id="dyn"/>-->
+		<script>
+			//$("link#dyn").attr("href", "css_pages/" + ((larg < 500)?"width_inf":"width_sup")+ "/parametres.css");
+			//$("script#dynJS").attr("src", "js_pages/" + ((larg < 500)?"width_inf":"width_sup")+ "/parametres.js");
+			
+			/*{
+				rel : "stylesheet",
+				type : "text/css",
+				href : 
+			}).appendTo("head");*/
+		</script>
+		<!--<script>
+			$("<link/>", {
+				rel : "stylesheet",
+				type : "text/css",
+				href : "css_pages/" + ((larg < 500)?"width_inf":"width_sup")+ "/parametres.css"
+			}).appendTo("head");
+		</script>-->
+		<link rel="stylesheet" media="screen and (max-width: 500px)" href="css_pages/width_inf/parametres.css" type="text/css" />
+		<link rel="stylesheet" media="screen and (min-width: 501px)" href="css_pages/width_sup/parametres.css" type="text/css" />
+    </head>
+
+    <body>
+        <div ng-controller="parametresCtrl">
+
+        <div class="header" data-snap-ignore="true">
+            <div class="btn_panel_left" onclick='openL();'></div>
+            <div class="rub">
+                paramètres
+            </div>
+        </div>
+        <div class="slider" data-snap-ignore="true">
+                <div ng-include='"views/slider.html"'></div>
+            </div>
+        <div class="swipe_button" data-snap-ignore="true">
+            <div class="swipe_touch {{mySwiper.class}}" ng-click='up()'></div>
+        </div>
+        
+        <div class="cache_loader" ng-show='loading'>
+            <div class="loader">
+                <img src="images/loader.gif" ng-show='loading'/>
+            </div>
+        </div>
+        
+        <div class="main" data-snap-ignore="true">
+            <div class="head_member_profil">
+                <div class="entete_parametres">
+                    <div class="col_members_left">
+                        <div class="avatar_member_profil" style='background-image: url("{{user_profil.avatar}}")' id="avatarUser"></div>
+                    </div>
+                    <div class="infos_member_profil">
+                        Vous êtes connecté<span ng-bind-html="(user_profil.civilite.toLowerCase() == 'madame')?'e':''"></span> en tant que : <div class="profil_detail_nom" ng-bind-html="user_profil.nom + ' ' + user_profil.prenom"></div>
+                    </div>
+                    <form method='POST' enctype="multipart/form-data" id='multiform'>
+                    	<input type="button" value="Sélectionner ma nouvelle photo" id="select_avatar" onclick="getfile()" />
+                    	<input type="file" id="hiddenfile" style="display:none" name='img' ACCEPT="image/gif,image/jpeg" />
+                    	<input type="hidden" name="MAX_FILE_SIZE" value="700000" />
+                        <input type="hidden" name='token' id="token" value='{{token}}'>
+                        <input type="hidden" name='mai' id="mai" value='{{user_profil.mail}}'>
+                        <input type="hidden" name='id' id="id" value='{{user_profil.id}}'/>
+                        <input type="hidden" id="host" value="{{hostUrl}}">
+                        <input type='submit' id="modif_avatar" value='VALIDER'/>
+                     </form>
+                </div>
+
+                <div class="connect_data">
+                    <div class="email_statut">
+                        <div class="connect_mail">
+                            Votre e-mail : {{pr.email}}
+                        </div>
+                    </div>
+                    <div class="connect_mdp">
+                        <div class="label_mdp">
+                            Votre mot de passe :
+                        </div>
+                        <input class="champ_mdp" type='password' disabled="disabled" ng-model='texte' id="_mdp_"/>
+                    </div>
+                    <div id="ch2" style="display: none" class="change">
+                        <!--<input type='checkbox' value='0' id="aff" onchange="$('.mdp').attr('type',($('#aff').is(':checked'))?'text':'password');" /> afficher le mot de passe-->
+                        <div ng-click="changeMDP()" onclick="changePB();">
+                            <input type="submit" value="Valider"/>
+                        </div>
+                    </div>
+                    <div onclick="changeP()" class="change" id="ch1">
+                        <input type="submit" value="CHANGER MON MOT DE PASSE"/>
+                    </div>
+                    <div class="chmdp_message">
+                        <div ng-show="error" style="color:red;font-size: 11px;text-align:center">
+                            {{error}}
+                        </div>
+                        <div ng-show="message" style="color:green;font-size: 11px;text-align:center">
+                            {{message}}
+                        </div>
+                    </div>
+                </div>
+                
+                <button id="editProfil" ng-click="editProfil()">EDITER MON PROFIL</button>
+                <button id="editPartners" ng-click="editPartners()">EDITER MES PARTENAIRES</button>
+
+                <div class="newsletter">
+                    <div class="news_message">
+                        Vous {{(user_profil.newsletter == '0')?"n'":""}}êtes{{(user_profil.newsletter == '0')?" pas":""}} inscrit{{(user_profil.civilite.toLowerCase() == 'madame')?'e':''}} à la newsletter
+                    </div>
+                    <div class="event_newsletter_off" ng-if='user_profil.newsletter != "1"' ng-click='newsletter()' style='background-image: url("images/addevent.svg");'></div>
+                    <div class="event_newsletter_on" ng-if='user_profil.newsletter == "1"' ng-click='newsletter()' style='background-image: url("images/event_on.svg");'></div>
+                </div>
+
+                <div class="webmaster">
+                    <div class="label_webmaster">
+                        Demande de mise à jour de votre profil
+                    </div>
+                    <a href="mailto:appli@leclubdesannonceurs.com?subject=Demande de modification de votre profil&body=Ici les informations que vous souhaitez nous faire parvenir" class="post_profil"><div class="picto_webmaster"></div></a>
+                </div>
+
+                <div>
+                    <input class="disconnect" type="submit" value="DECONNEXION" ng-click='deconnexion()'>
+                </div>
+
+            </div>
+        </div>
+    </div>
+        
+    </body>
+	
+	<script type="text/javascript" id="dynJS" src="js_pages/width_inf/parametres.js"></script>
+
+</html>

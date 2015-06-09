@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<style>
+.ac_list {
+  float: right;
+  position: re;
+  /* top: 0px; */
+  padding: 0 10px;
+}
+.ac_list span {
+  display: table;
+}
+
+.titre4{
+font-size: 14px;
+}
+
+.plan_l {
+  width: 49%;
+  float: left;
+}
+
+.plan_r {
+  width: 49%;
+  float: right;
+}
+
+span.ctrl_ac {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  /* background: #666; */
+  border-radius: 15px;
+  font-size: 0px;
+  cursor:pointer;
+}
+.del_ac{
+left: -45px;
+background-image: url('images/btn_close_pop.svg');
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  background-size: 100% auto;
+}
+
+.edi_ac{
+left: -20px;
+ background-image: url('images/edit_mini.png');
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  background-size: 100% auto;
+}
+</style>
+</head>
+
+<body>
+<div class="header">
+		<div class="btn_panel_left" onclick="openL();"></div>
+		<div class="rub"> Mon Agenda </div>
+	</div>
+<div ng-include='"views/" + agenda_mode.view + ".html"'></div>
+</body>
+</html>

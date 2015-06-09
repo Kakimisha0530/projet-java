@@ -1,0 +1,88 @@
+
+<div class="main div-scroll">
+	<div class="calendar">
+		<table class="DatPick" border="0" cellpadding="0" cellspacing="0">
+				<tr>
+					<td align="center" valign="center" class="btnPrev"><a href="#"
+						ng-click="changedate(-1)">Prev Mo</a></td>
+					<td align="center" valign="center" colspan="5" class="curentMonth" style="font-size: 14px;">
+					{{current_da}}
+					</td>
+					<td align="center" valign="center" class="btnNext"><a href="#"
+						ng-click="changedate(1)">Next Mo</a></td>
+				</tr>
+		</table>
+
+	<div class="planning">
+		<div class="plan_l">
+			<div class="wrap cate{{val.categorieId}}"
+				ng-repeat="(ke,val) in ac_lis.left" ng-if="val.id > 0">
+				<div class="line6">
+					<div class="picto6"
+						style="background-image: url('images/cate{{val.categorieId}}.jpg');"></div>
+					<div class="texte6">
+						<div class="texte_content6">
+							<div class="titre6"
+								ng-bind-html="parseHour_bis(val.debut,val.fin)"></div>
+							<div class="description6" ng-bind-html="val.texte"></div>
+						</div>
+						<div class="date6">
+							<span class="ctrl_ac del_ac" ng-click="delAc(val.id)">x</span> <span
+								class="ctrl_ac edi_ac" ng-click="editAc(val.id)">i</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="wrap ac_add cate50" ng-if="ac_lis.add_l" ng-click="editAc(0)" style="cursor:pointer;">
+				<div class="line6">
+					<div class="picto6" style="background-image: url('images/add_big.png');"></div>
+					<div class="texte6">
+						<div class="texte_content6">
+							<div class="titre6"><h3>Ajouter</h3></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="plan_r">
+			<div class="wrap cate{{val.categorieId}}"
+				ng-repeat="(ke,val) in ac_lis.right" ng-if="val.id > 0">
+				<div class="line6">
+					<div class="picto6"
+						style="background-image: url('images/cate{{val.categorieId}}.jpg');"></div>
+					<div class="texte6">
+						<div class="texte_content6">
+							<div class="titre6"
+								ng-bind-html="parseHour_bis(val.debut,val.fin)"></div>
+							<div class="description6" ng-bind-html="val.texte"></div>
+						</div>
+						<div class="date6">
+							<span class="ctrl_ac del_ac" ng-click="delAc(val.id)">x</span> <span
+								class="ctrl_ac edi_ac" ng-click="editAc(val.id)">i</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="wrap ac_add cate50" ng-if="ac_lis.add_r" ng-click="editAc(0)" style="cursor:pointer;">
+				<div class="line6">
+					<div class="picto6" style="background-image: url('images/add_big.png');"></div>
+					<div class="texte6">
+						<div class="texte_content6">
+							<div class="titre6"><h3>Ajouter</h3></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	$(document).ready(function() {
+		//createCalendar();
+	});
+
+	function LoadCalendarFor(da_str) {
+
+	}
+</script>

@@ -1,0 +1,880 @@
+html,body{
+  height:100%;
+  margin:0;
+  padding:0;
+}
+
+.wrapper {
+	background: #F0EFE7;
+	width: 500px;
+	height: 400px;
+	margin: auto;
+	overflow: scroll;
+	padding: 15px;
+	z-index: 1000;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	-webkit-box-shadow: 0 0 25px 1000px rgba(0,0,0,0.5);
+	box-shadow: 0 0 25px 1000px rgba(0,0,0,0.5);
+	transform: translate(-50%, -50%);
+	-webkit-transform: translate(-50%, -50%);
+	border-radius: 20px;
+}
+
+.space {
+	padding: 20px 0;
+}
+
+.space_min {
+	padding: 10px 0;
+}
+
+.marge {
+	margin: 0 20px;
+}
+
+.mybutton {
+
+	width: 100px;
+	margin-top: 40px;
+	/*position: absolute;
+	margin-left:10px;*/
+	padding: 10px;
+	text-align: center;
+	left: 100px;
+	border-radius: 10px;
+	background-color: #CADDE8;
+}
+
+#pluginStyle table, td, th {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+#pluginStyle td{
+    vertical-align: middle;
+    text-align: center;
+    height: 30px;
+}
+
+#pluginStyle th{
+	background: #A0C3FF;
+	font-weight: bold;
+	height: 30px;
+}
+
+#pluginStyle table{
+	width: 100%;
+}
+
+.filesList fieldset{
+	margin-top:15px;
+}
+
+/* ================================================================================= */
+/* === CALCULATRICE ================================================================ */
+/* ================================================================================= */
+
+/* === GLOBAL ====================================================================== */
+
+.infoPagePopup {
+	display: none;
+	}
+	
+*:focus { outline: none; }
+/*#global #globalSecond #globalThird #mid .content { position: relative; }*/
+body input { border: none; }
+.text { display: none; }
+
+.title {
+	width: 750px;
+	margin-bottom: 0!important;
+}
+
+.chapo {
+	width:750px;
+	color:#4E99E8;
+	margin-top: 0!important;
+	margin-bottom: 20px!important;
+	font-size: 14px;
+	}
+	
+.chapo .linkTraining,
+.chapo .progBack { margin-left: 10px; font-size: 12px; color: #35bdb2; text-decoration: none; }
+.chapo .linkTraining:hover, 
+.chapo .progBack:hover { text-decoration: underline; }
+
+#EquivalenceForm {
+	width:100%;
+	}
+
+
+
+
+label {
+	display: inline-block;
+	padding-top:10px;
+	padding-bottom:10px;
+	padding-left:10px;
+	-webkit-transition: all 0.2s linear 0s;
+	-moz-transition: all 0.2s linear 0s;
+	-ms-transition: all 0.2s linear 0s;
+	-o-transition: all 0.2s linear 0s;
+	transition: all 0.2s linear 0s;
+	}
+	
+label:hover,
+label.labelChecked {
+	background:#e4eef9;
+	color:#BE3992;
+	cursor: pointer;
+	}
+
+.typeElevator .labelChecked {
+	color: #BE3992;
+	}
+.actiElevator .labelChecked {
+	color: #BE3992;
+	}
+
+.filters {
+	width:100%;
+	margin-bottom: 15px;
+	}
+	
+.filters > .left {
+	margin-right: 10px;
+	}
+	
+.filters > .left.date {
+	width:230px;
+	}
+	
+.filters > .left.type {
+	width:230px;
+	}
+	
+.filters > .left.acti {
+	width:270px;
+	margin-right: 0;
+	}
+
+h3 {
+	 height:26px;
+	 margin:0 0 15px 0;
+	 font-size: 13px;
+	 line-height: 26px;
+	 }
+	 
+h3 > .number {
+	display: inline-block;
+	margin-right: 5px;
+	vertical-align: middle;
+	width: 26px;
+	background: #BE3992;
+	border-radius:30px;
+	-webkit-border-radius:30px;
+	color:#FFF;
+	text-align: center;
+	}
+	
+
+/* =========================== */
+/* =========== DATE ========== */
+/* =========================== */
+
+.div-scroll{
+	height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.DatPick {
+	/*display: none;*/
+}
+	
+.calendar {
+	width: 100%;
+	overflow: hidden;
+	border: 1px solid #E1E1E1;
+	}
+	
+.calendar table {
+	width: 100%;
+}
+	
+.calendar td {
+	border: 1px solid #f2f2f2;
+	width: 33px;
+	height: 33px;
+}
+
+#vue-mois .calendar tbody tr > td {
+	height: 150px;
+	text-align: left;
+	vertical-align: top;
+}
+	
+.calendar tr > td:first-child {
+	border-left:none;
+}
+	
+.calendar td.selected {
+	background-color: #BE3992;
+	}
+	
+.calendar td.selected a {
+	color: #ffffff!important;
+}
+
+.calendar a {
+	display: block;
+	padding: 5px;
+	font-size: 14px;
+	color:#595959;
+	text-align: center;
+	text-decoration: none;
+	width: 30px;
+	height: 30px;
+	}
+	
+.calendar a:hover {
+	background: #669E31;
+	color: #FFF;
+	}
+
+.calendar td.btnPrev ,
+.calendar td.btnNext,
+.calendar td.curentMonth {
+	border: none;
+	} 
+	
+.calendar td.btnPrev a,
+.calendar td.btnNext a {
+	width: 26px;
+	height: 26px;
+	font-size: 0;
+	-webkit-border-radius: 30px;
+	border-radius: 30px;
+	border: none !important;
+	-webkit-appearance: none;
+	background-color: #94A385;	
+}
+	
+/*.calendar td.btnPrev a {
+	background: url(../images/go-l.png)0 0 no-repeat;
+	background-size: cover;
+}*/
+
+.calendar td.btnPrev a {
+	background-image: url("../images/prev_white.svg");
+}
+	
+.calendar td.btnNext a {
+	background-image: url("../images/next_white.svg");
+	/*background: url(../images/go-r.png)0 0 no-repeat;
+	background-size: cover;*/
+	}
+	
+.calendar td.curentMonth {
+	padding: 5px 0;
+	}
+	
+.calendar td.labelDay {
+	padding: 5px;
+	font-size: 16px;
+	font-weight: 900;
+	color:#94A385;
+	}
+
+
+.calendar td.on a {
+	font-weight: bold;
+	color: #BE3992;
+	border: 1px solid #BE3992;
+	border-radius: 15px;
+	}
+	
+.calendar td.on a:hover {
+	background: #669E31;
+	color: #ffffff;
+	}		
+
+	
+.calendar td.today a {
+	font-weight: bold;
+	color: #ffffff;
+	background: #94A385;
+	}
+	
+.calendar td.today a:hover {
+	background: #669E31;
+	color: #ffffff;
+	}
+	
+
+/* =========================== */
+/* ========== TYPES ========== */
+/* =========================== */
+	
+
+
+.filters .type .typeDrum .typeHeadBand { width: 251px; height: 33px; margin: 2px 0 0 17px;}
+
+.filters .type .typeDrum .typeHeadBand .typeText { float: left; margin-left: 10px; padding-top: 2px;font-size: 14px;line-height: 29px; }
+
+.filters .type .typeDrum .typeHolder {
+	width: 100%;
+	height: 265px;
+	overflow-y:auto;
+	overflow-x: hidden;
+	border: 1px solid #E1E1E1;
+	}
+	
+.filters .type .typeDrum .typeHolder .typeElevator {
+	width: 100%;
+	height: auto;
+	font-size: 14px;
+	}
+	
+.filters .type .typeDrum .typeHolder label { width: 100%; }
+
+label[for="ca10"] b {
+	font-weight: 400;
+	}
+
+	
+/* =========================== */
+/* ========== ACTIS ========== */
+/* =========================== */
+	
+
+.filters .acti .actiDrum .actiTitle2 {
+	margin: 20px 0 0 10px;
+	font-size: 13px;
+	}
+	
+.filters .acti .actiDrum .actiHeadBand { 
+	display:none;
+	position: relative;
+	width: 100%;
+	height: 29px;
+	padding: 10px 0;
+	margin-bottom: 15px;
+	border: 1px solid #E1E1E1;
+	}
+	
+.filters .acti .actiDrum .actiHeadBand .actiText1 {
+	margin-left: 10px;
+	margin-top: 0;
+	margin-bottom: 15px;   
+	font-size: 14px;
+	}
+	
+.filters .acti .actiDrum .actiHeadBand .actiText2 {
+	}
+	
+.filters .acti .actiDrum .actiHeadBand .levels {
+	width: 100%;
+	}
+	
+.filters .acti .actiDrum .actiHeadBand .levels input { position: relative; float: left; margin-left: 25px; /margin-left: 10px; cursor: pointer; vertical-align: top; opacity: 1; filter: alpha(opacity:100); }
+.filters .acti .actiDrum .actiHeadBand .levels input#radionv12,
+.filters .acti .actiDrum .actiHeadBand .levels input#radionv22 { margin-left: 21px; /margin-left: 15px; }
+.filters .acti .actiDrum .actiHeadBand .levels input#radionv13,
+.filters .acti .actiDrum .actiHeadBand .levels input#radionv23 { margin-left: 21px; /margin-left: 13px; }
+.filters .acti .actiDrum .actiHeadBand .levels input#radionv14,
+.filters .acti .actiDrum .actiHeadBand .levels input#radionv24 { margin-left: 33px; /margin-left: 23px; }
+
+.filters .acti .actiDrum .actiHeadBand .levelsText { 
+	float: left;
+	width:100%;
+	margin-bottom: 15px;
+	}
+
+.filters .acti .actiDrum .actiHeadBand .levelsText .level1Text,
+.filters .acti .actiDrum .actiHeadBand .levelsText .level2Text,
+.filters .acti .actiDrum .actiHeadBand .levelsText .level3Text,
+.filters .acti .actiDrum .actiHeadBand .levelsText .levelProText,
+.filters .acti .actiDrum .actiHeadBand .levelsText .levelAllText {
+	float: left;
+	margin-right: 28px;
+	margin-top: -22px;
+	font-size: 0.8em;
+	line-height: 29px;
+	}
+	
+.filters .acti .actiDrum .actiHeadBand .levelsText .level1Text {
+	margin-top:-22px;
+	margin-left: 45px;
+	}
+	
+.filters .acti .actiDrum .actiHeadBand .levelsText .level2Text,
+.filters .acti .actiDrum .actiHeadBand .levelsText .level3Text {
+	/*margin-right: 26px;*/
+	margin-left: 2px;
+	}
+
+.like-label-container {
+	width:100%;
+	background: #E1E1E1;
+	padding: 5px 0;
+}
+span.like-label-item {
+	width:30px;
+	font-size: 10px;
+	text-align: center;
+}
+
+span.like-label-item:first-child {
+	margin-left: 188px;
+}
+
+	
+.filters .acti .actiDrum .actiHolder {
+	position: relative;
+	width: 100%;
+	height: 241px;
+	overflow-y: auto;
+	margin-bottom: 15px;
+	border: 1px solid #E1E1E1;
+}
+
+.filters .acti .actiDrum .actiHolder .actiElevator {
+	position: relative;
+	width: 100%;
+	font-size: 14px;
+	}
+	
+.filters .acti .actiDrum .actiHolder .actiElevator .separator1 {
+	position: absolute;
+	top: 0;
+	left: 185px;
+	height: 100%;
+	min-height: 265px;
+	border-right: 1px solid #f2f2f2;
+}
+
+.filters .acti .actiDrum .actiHolder .actiElevator .separator2 {
+	position: absolute;
+	top: 0;
+	left: 217px;
+	height: 100%;
+	min-height: 265px;
+	border-right: 1px solid #f2f2f2;
+}
+
+.filters .acti .actiDrum .actiHolder .actiElevator label {
+	position: relative;
+	width: 247px;
+	padding: 10px 65px 10px 10px;
+	}
+	
+.filters .acti .actiDrum .actiHolder .actiElevator label:last-child {
+	margin-bottom:0;
+	}
+	
+.filters .acti .actiDrum .actiHolder .actiElevator .calcAddCateLink {
+	position: absolute;
+	top: 10px;
+	right: 35px;
+	width: 21px;
+	height:21px;
+	margin: 0;
+	font-size: 0;
+	color: transparent;
+	background: url('images/ajout.png') no-repeat 0 0;
+	}
+	
+.filters .acti .linkFavorisCategorie {
+	position: absolute;
+	top:10px;
+	right: 5px;
+	display: block;
+	width: 20px;
+	height: 21px;
+	background: url('images/fav.png') no-repeat 0 -21px;
+	font-size: 0;
+	color: transparent;
+	}
+	
+.delLinkFavori {
+	position: absolute;
+	top:10px;
+	right: 5px;
+	display: block;
+	width: 20px;
+	height: 21px;
+	background: url('images/fav.png') no-repeat 0 0;
+	font-size: 0;
+	color: transparent;
+	}
+	
+	
+/* =========================== */
+/* ========= RESULTS ========= */
+/* =========================== */
+		
+.results {
+	width: 100%;
+	margin-bottom: 15px;
+	}
+	
+.results .resultsTitle {
+	width:500px;
+	margin: 20px 0 4px 0;
+	font-size: 14px;
+	}
+	
+.results .resultsDate { 
+	height: 28px;
+	margin-left: 5px;
+	font-size: 14px;
+	font-weight: 900;
+	color:#BE3992;
+	}
+	
+.results .resultsDrum {
+	clear:both;
+	width:100%;
+	border: 1px solid #E1E1E1;
+	font-size: 14px;
+	}
+
+.results .resultsDrum .resultsHeadBand {
+	width: 100%;
+	font-size: 12px;
+	background: #E1E1E1;
+	padding: 8px 10px;
+	font-size: 10px;
+	text-transform: uppercase;
+	}
+	
+.results .resultsDrum .resultsHeadBand .resultsText1 {
+	width: 200px;
+	}
+	
+.results .resultsDrum .resultsHeadBand .resultsText2 {
+	width: 430px;
+	}
+	
+.results .resultsDrum .resultsHeadBand .resultsText3 { 
+	width: 60px;
+	padding-left: 15px;
+	}
+	
+.results .resultsDrum .resultsHolder {
+	width: 100%;
+	}
+	
+.results .resultsDrum .resultsHolder .resultsElevator {
+	width:100%;
+	}
+	
+.results .resultsDrum .resultsHolder .resultsElevator .resultItem .resultItemTitle,
+.results .resultsDrum .resultsHolder .resultsElevator .resultItem .timeSliders,
+.results .resultsDrum .resultsHolder .resultsElevator .resultItem input,
+.results .resultsDrum .resultsHolder .resultsElevator .resultItem .calcDelCateLink { float: left; }
+
+.results .resultsDrum .resultsHolder .resultsElevator .resultItem {
+	position:relative;
+	width: 100%;
+	padding: 8px 10px;
+	border-top: 1px solid #E1E1E1;
+	}
+	
+.results .resultsDrum .resultsHolder .resultsElevator .resultItem .timeHM {
+	float: left;
+}
+	
+.results .resultsDrum .resultsHolder .resultsElevator .resultWithings,
+.results .resultsDrum .resultsHolder .resultsElevator .resultRunkeeper {
+	display: none;
+}
+	
+.results .resultsDrum .resultsHolder .resultsElevator .resultItem .resultItemTitle {
+	display: block;
+	width: 200px;
+	margin-right: 10px;
+	}
+	
+.results .resultsDrum .resultsHolder .resultsElevator .resultItem .calcDelCateLink {
+	position:absolute;
+	top: 5px;
+	right: 15px;
+	float:none;
+	display: inline;
+	width: 21px;
+	height: 21px;
+	background: url('images/supr.png') no-repeat 0 0;
+	}
+	
+.results .resultsDrum .resultsHolder .resultsElevator .resultItem .calcDelCateLink:hover {
+	}
+	
+.results .resultsDrum .resultsHolder .resultsElevator .ActiviteExoProg .calcDelCateLink { display: none; }
+
+.results .resultsDrum .resultsHolder .resultsElevator .resultItem .componentTPS {
+	display:none;
+	float: none;
+	width: 30px;
+	height: 20px;
+	font-size: 14px;
+	font-weight: 900;
+	color: #595959;
+	text-align: right;
+	}
+	
+.results .resultsDrum .resultsHolder .resultsElevator .resultItem .componentPTS {
+	float:left;
+	width: 40px;
+	height: 20px;
+	margin-left: 10px;
+	margin-right: 5px;
+	font-size: 14px;
+	font-weight: 900;
+	color: #595959;
+	text-align: right;
+	}
+	
+.resultItem span.abbr.min,
+span.none {
+	display: none!important;
+	}
+	
+/* Mobile Device */
+
+.mobile-on {
+	display: none;
+}
+
+.mobileDevice {}
+
+.mobileDevice .timeSliders,
+.mobileDevice .timeHM {
+	display: none;
+}
+
+.mobileDevice .mobile-on {
+	display: block;
+	width: 403px;
+}
+
+.mobileDevice .mobile-on select {
+	position: relative;
+	width: 60px;
+	height: 30px;
+	padding-top: 5px;
+	background: #F6F6F6;
+	border: 1px solid #E1E1E1;
+	text-indent: 5px;
+}
+
+.mobileDevice .mobile-on select.minute {
+	margin-left: 30px;
+}
+
+.mobileDevice .mobile-on span.minute,
+.mobileDevice .mobile-on span.heure {
+	padding-left: 10px;
+}
+
+
+
+/* =========================== */
+/* ========= SLIDERS ========= */
+/* =========================== */
+
+.results .resultsDrum .resultsHolder .resultsElevator .resultItem .timeSliders {
+	width: 336px;
+	height: 20px;
+	margin-right: 5px;
+	}
+	
+.results .resultsDrum .resultsHolder .resultsElevator .resultItem .timeSliders .dijitReset { width: 336px; height: auto; margin: 0; padding: 0; font: inherit; color: inherit; line-height: normal; border: 0; }
+.results .resultsDrum .resultsHolder .resultsElevator .resultItem .timeSliders .dijitSliderDecrementIconH,
+.results .resultsDrum .resultsHolder .resultsElevator .resultItem .timeSliders .dijitSliderIncrementIconH,
+.results .resultsDrum .resultsHolder .resultsElevator .resultItem .timeSliders .dijitSliderBumper { display: none; }
+
+.results .resultsDrum .resultsHolder .resultsElevator .resultItem .timeSliders  .dijit_a11y div.dijitSliderImageHandle,
+.dijitSliderImageHandle,
+.results .resultsDrum .resultsHolder .resultsElevator .resultItem .timeSliders  .dijitSliderImageHandle,
+.results .resultsDrum .resultsHolder .resultsElevator .resultItem .timeSliders  .dijitSliderImageHandleH,
+.results .resultsDrum .resultsHolder .resultsElevator .resultItem .timeSliders  .dijitSliderImageHandleH:hover {
+	width: 18px;
+	height: 20px;
+	margin-top: -5px;
+	border: 0;
+	background: url('../images/global/sliderHCursor.png') no-repeat 0 0;
+	}
+
+.results .resultsDrum .resultsHolder .resultsElevator .resultItem .timeSliders  .dijitSliderHover .dijitSliderImageHandle { background-position: 0 0; }
+
+.results .resultsDrum .resultsHolder .resultsElevator .resultItem .timeSliders  .dijitSlider .dijitSliderRemainingBarH {
+	width: 336px;
+	height: 14px;
+	border: none;
+	background: none;
+	background: url('../images/global/sliderH.png') no-repeat 0 3px;
+	}
+
+.results .resultsDrum .resultsHolder .resultsElevator .resultItem .timeSliders  .dijitSlider .dijitSliderProgressBarH {
+	z-index: 2;
+	height: 2px;
+	margin-top: 11px;
+	border: none;
+	background: none;
+	background-color: #BE3992;
+	}
+
+.results .resultsDrum .resultsHolder .resultsElevator .ActiviteExoProg .resultItem .claro { pointer-events: none; }
+
+/* =========================== */
+/* ========= REMINDER ======== */
+/* =========================== */
+	
+.reminder { 
+	width: 100%;
+	padding: 50px 10px;
+	margin-bottom:20px;
+	font-size: 16px;
+	border: 1px solid #E1E1E1;
+	}
+	
+.reminder > p {
+	margin: 0;
+	text-align: center;
+	}
+	
+.reminder > p > input {
+	width:100px;
+	padding:0;
+	font-size:16px;
+	color:#BE3992;
+	font-weight: 900;
+	text-align: center;
+	}
+	
+.reminder > p > span {
+	display:inline-block;
+	margin:0 5px;
+	font-size: 16px;
+	font-weight: 900;
+	color: #BE3992;
+	}
+.reminder > p > span#resultTimeHM {color: #01476d;}
+
+.reminder > p > span > input {
+	width: 50px;
+	padding:0;
+	background: transparent;
+	font-size: 16px;
+	font-weight: 900;
+	color: #BE3992;
+	text-align: center;
+	}
+	
+.reminder > p > span > input#phraTPSInput {
+	width: 50px;
+	}
+
+/* =========================== */
+/* ========== TOTAL ========== */
+/* =========================== */
+
+.total {
+	display:none;
+	width: 100%;
+	margin-bottom:15px;
+	}
+	
+.total > .left {
+	width:365px;
+	height: 44px;
+	
+	font-size:16px;
+	
+	text-align: center;
+	}
+	
+.total .time {
+	border: 1px dotted #BE3992;
+	color:#BE3992;
+	}
+
+.total .points {
+	margin-left: 20px;
+	border: 1px dotted  #74bcff;
+	color: #74bcff;
+	}
+
+.total .time #fieldTPSInput,
+.total .points #fieldPTSInput {
+	width:25%;
+	height: 44px;
+	font-size: 36px;
+	line-height: 36px;
+	text-align: center;
+	border: none; background: transparent;
+	color:#BE3992;
+	}
+	
+.total .points #fieldPTSInput {
+	color: #74bcff;
+	}
+	
+ 
+/* =========================== */
+/* ========== SAVE =========== */
+/* =========================== */
+
+.save {
+	width:100%;
+	text-align: center;
+	}
+	
+.save .linkSaveCalculatrice {
+	padding: 10px 20px;
+	margin-bottom: 20px;
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 30px;
+	text-decoration: none;
+	text-align: center;
+	color:#FFF;
+	background: #BE3992;
+	border-radius:2px;
+	-webkit-border-radius:2px;
+	}
+	
+.save .linkSaveCalculatrice:hover {
+	background:#41B7AE;
+	}
+ 
+/* =========================== */
+/* ======== ELEVATORS ======== */
+/* =========================== */	
+		
+/* CSS Styles that are needed by jScrollPane for it to operate correctly. */
+.jspContainer { position: relative; overflow: hidden; }
+.jspPane { position: absolute; }
+.jspVerticalBar { position: absolute; top: 0; right: 0; width: 15px; height: 100%; background: red; }
+.jspHorizontalBar { position: absolute; bottom: 0; left: 0; width: 100%; height: 16px; background: red; }
+.jspVerticalBar *,
+.jspHorizontalBar * { margin: 0; padding: 0; }
+.jspCap { display: none; }
+.jspHorizontalBar .jspCap { float: left; }
+.jspTrack { position: relative; background: #dde; }
+.jspDrag { position: relative; top: 0; left: 0; width: 6px; margin: auto; cursor: pointer; -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px; background: #6a6a6a; behavior: url(/scripts/global/PIE.htc); }
+.jspHorizontalBar .jspTrack,
+.jspHorizontalBar .jspDrag { float: left; height: 100%; }
+.jspArrow { display: block; cursor: pointer; text-indent: -20000px; background: #50506d; }
+.jspArrow.jspDisabled { cursor: default; background: #80808d; }
+.jspVerticalBar .jspArrow { height: 16px; }
+.jspHorizontalBar .jspArrow	{ float: left; width: 16px; height: 100%; }
+.jspVerticalBar .jspArrow:focus { outline: none; }
+.jspCorner { float: left; height: 100%; background: #eeeef4; }
+* html .jspCorner { margin: 0 -3px 0 0; } /* Yuk! CSS Hack for IE6 3 pixel bug :( */
+
+

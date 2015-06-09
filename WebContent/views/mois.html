@@ -1,0 +1,13 @@
+	<div class="main div-scroll" id="vue-mois">
+		<div class="calendar" id="calendar"></div>
+	</div>
+<script>
+	$(document).ready(function(){
+		createCalendar();
+	});
+	
+	function reloadCalendar(){
+		changedate("",parseDate(1,Number($("#choix_mois").val() + 1),$("#choix_an").val()));
+		createCalendar();
+	}
+</script>

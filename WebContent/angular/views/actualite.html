@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<!--<link rel="stylesheet" type="text/css" id="dyn"/>-->
+		<script>
+			//$("link#dyn").attr("href", "css_pages/" + ((larg < 500)?"width_inf":"width_sup")+ "/actualite.css");
+			//$("script#dynJS").attr("src", "js_pages/" + ((larg < 500)?"width_inf":"width_sup")+ "/actualite.js");
+			/*{
+				rel : "stylesheet",
+				type : "text/css",
+				href : 
+			}).appendTo("head");*/
+		</script>
+		<!--<script>
+			$("<link/>", {
+				rel : "stylesheet",
+				type : "text/css",
+				href : "css_pages/" + ((larg < 500)?"width_inf":"width_sup")+ "/actualite.css"
+			}).appendTo("head");
+		</script>-->
+		<link rel="stylesheet" media="screen and (max-width: 500px)" href="css_pages/width_inf/actualite.css" type="text/css" />
+		<link rel="stylesheet" media="screen and (min-width: 501px)" href="css_pages/width_sup/actualite.css" type="text/css" />
+	</head>
+
+	<body>
+
+		<div class="header">
+			<div class="btn_panel_left" onclick="openL();"></div>
+			<div class="rub">
+				fil d'actualit&eacute;
+			</div>
+			<div class="btn_panel_right" style='background-image: url("{{user_profil.avatar}}")' onclick="openR();"></div>
+		</div>
+		<div class="slider" data-snap-ignore="true">
+				<div ng-include='"views/slider.html"'></div>
+			</div>
+		<div class="swipe_button">
+			<div class="swipe_touch {{mySwiper.class}}" ng-click='up()'></div>
+		</div>
+
+		<div class="cache_loader" ng-show='loading'>
+			<div class="loader">
+				<img src="images/loader.gif" ng-show='loading'/>
+			</div>
+		</div>
+
+		<div class="main">
+			<div class="spacer"></div>
+			<div class="wrap cate{{actu.categorieId}}" ng-repeat='(key,actu) in actualites' ng-click='seeEvent(actu.id)' >
+				<div class="line3">
+					<div class="texte3">
+						<div class="texte_content3">
+							<div class="event" ng-bind-html='escapedHtml(actu.categorie)'></div>
+							<div class="titre_event" ng-bind-html='escapedHtml(actu.titre)'></div>
+							<div class="text_contact" ng-bind-html='escapedHtml(actu.lieu)'></div>
+						</div>
+					</div>
+					<div class="date_content_min">
+						<div class="mois">
+							{{getMois(actu.debut)}}
+						</div>
+						<div class="year">
+							{{getJour(actu.debut)}}
+						</div>
+					</div>
+				</div>
+
+				<div class="base_line3">
+					<div class="btn_membres"></div><span class='count_membres'>{{actu.participants}}</span>
+					<div class="btn_interv"></div><span class='count_interv'>{{actu.intervenants}}</span>
+					<div style='display: none;'>
+						{{actu.note}}
+					</div>
+					<div class="btn_map"></div>
+					<div class="btn_coms"></div>
+					<div class="btn_note"></div>
+					<div class="btn_sync"></div>
+					<div class="event_off" ng-if='actu.inscrit != "1"' style='background-image: url("images/addevent.svg");'></div>
+					<div class="event_on" ng-if='actu.inscrit == "1"' style='background-image: url("images/event_on.svg");'></div>
+				</div>
+			</div>
+			<div class="spacer"></div>
+		</div>
+		<div class="switch">
+			<div class="btn_filactu" >
+					fil d'actualités
+			</div>
+			<div class="btn_agenda" ng-click="open(1);">
+					agenda
+			</div>
+		</div>
+	</body>
+	
+	<script type="text/javascript" id="dynJS" src="js_pages/width_inf/actualite.js"></script>
+
+</html>

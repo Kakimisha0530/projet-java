@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<!--<link rel="stylesheet" type="text/css" id="dyn"/>-->
+		<script>
+			//$("link#dyn").attr("href", "css_pages/" + ((larg < 500)?"width_inf":"width_sup")+ "/galerie.css");
+			//$("script#dynJS").attr("src", "js_pages/" + ((larg < 500)?"width_inf":"width_sup")+ "/galerie.js");
+			/*{
+				rel : "stylesheet",
+				type : "text/css",
+				href : 
+			}).appendTo("head");*/
+		</script>
+		<!--<script>
+			$("<link/>", {
+				rel : "stylesheet",
+				type : "text/css",
+				href : "css_pages/" + ((larg < 500)?"width_inf":"width_sup")+ "/galerie.css"
+			}).appendTo("head");
+		</script>-->
+		<link rel="stylesheet" media="screen and (max-width: 500px)" href="css_pages/width_inf/galerie.css" type="text/css" />
+		<link rel="stylesheet" media="screen and (min-width: 501px)" href="css_pages/width_sup/galerie.css" type="text/css" />
+	</head>
+
+	<body>
+
+		<div class="white"></div>
+
+		<div class="view_content">
+
+			<div class="header">
+				<div class="btn_panel_left" onclick="openL();"></div>
+				<div class="rub">
+					y étiez vous ?
+				</div>
+				<div class="btn_panel_right" style='background-image: url("{{user_profil.avatar}}")' onclick="openR();"></div>
+			</div>
+			<div class="slider" data-snap-ignore="true">
+				<div ng-include='"views/slider.html"'></div>
+			</div>
+			<div class="swipe_button">
+				<div class="swipe_touch {{mySwiper.class}}" ng-click='up()'></div>
+			</div>
+
+			<div class="cache_loader" ng-show='loading'>
+				<div class="loader">
+					<img src="images/loader.gif" ng-show='loading'/>
+				</div>
+			</div>
+
+			<div class="main">
+			    <div ng-if='_is_connected'>
+				<div class="wrap {{'cate' + val.idgalerie}}" ng-repeat='(key,val) in mygalerie'>
+					<div class="line6" ng-click="open(val.idcate);">
+						<div class="picto6" style="background-image: url('{{val.vignette}}');"></div>
+						<div class="texte6">
+							<div class="texte_content6">
+								<div class="titre6" ng-bind-html="val.titregalerie "></div>
+								<div class="description6" ng-bind-html="val.titrecate "></div>
+							</div>
+							<div class="date6" ng-bind-html="parseDate(val.date)"></div>
+						</div>
+					</div>
+				</div></div>
+				<div ng-if='!_is_connected'>
+                <div class='spacer'></div>
+                <div ng-include='"views/hors-ligne.html"'></div>
+            </div>
+			</div>
+
+		</div>
+
+	</body>
+	
+	<script type="text/javascript" id="dynJS" src="js_pages/width_inf/galerie.js"></script>
+
+</html>

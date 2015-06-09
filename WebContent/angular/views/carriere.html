@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<!--<link rel="stylesheet" type="text/css" id="dyn"/>-->
+		<script>
+			//$("link#dyn").attr("href", "css_pages/" + ((larg < 500)?"width_inf":"width_sup")+ "/carriere.css");
+			//$("script#dynJS").attr("src", "js_pages/" + ((larg < 500)?"width_inf":"width_sup")+ "/carriere.js");
+			/*{
+				rel : "stylesheet",
+				type : "text/css",
+				href : 
+			}).appendTo("head");*/
+		</script>
+		<!--<script>
+			$("<link/>", {
+				rel : "stylesheet",
+				type : "text/css",
+				href : "css_pages/" + ((larg < 500)?"width_inf":"width_sup")+ "/carriere.css"
+			}).appendTo("head");
+		</script>-->
+		<link rel="stylesheet" media="screen and (max-width: 500px)" href="css_pages/width_inf/carriere.css" type="text/css" />
+		<link rel="stylesheet" media="screen and (min-width: 501px)" href="css_pages/width_sup/carriere.css" type="text/css" />
+	</head>
+
+	<body>
+
+		<div class="white"></div>
+
+		<div class="view_content">
+
+			<div class="header">
+				<div class="btn_panel_left" onclick="openL();"></div>
+				<div class="rub">
+					carrière
+				</div>
+				<div class="btn_panel_right" style='background-image: url("{{user_profil.avatar}}")' onclick="openR();"></div>
+			</div>
+			<div class="slider" data-snap-ignore="true">
+				<div ng-include='"views/slider.html"'></div>
+			</div>
+			<div class="swipe_button">
+				<div class="swipe_touch {{mySwiper.class}}" ng-click='up()'></div>
+			</div>
+
+			<div class="search">
+				<select class="select_center" ng-model='search.categorieId'>
+					<option value="" disabled selected>Filtre</option>
+					<option value="2">CV Membres</option>
+					<option value="1">CV Recommandés</option>
+					<option value="3">CV Consulting</option>
+					<option value="4">CV Stages</option>
+					<option value="5">Offres emplois</option>
+				</select>
+			</div>
+
+			<div class="cache_loader" ng-show='loading'>
+				<div class="loader">
+					<img src="images/loader.gif" ng-show='loading'/>
+				</div>
+			</div>
+
+			<div class="main">
+			    <div ng-if='_is_connected'>
+				<!--<div class="spacer"></div>-->
+				<div class="wrap cate{{val.categorieId}}" ng-repeat='(key,val) in cvlist | filter:search:strict'>
+					<div class="line2">
+						<div onclick="getsize($(this));" data-titre="{{val.prenom + ' ' + val.nom}}">
+							<div class="picto2">
+								<div class="avatar" style='background-image: url("{{getAvatar(val)}}");'></div>
+							</div>
+							<div class="texte2">
+								<div class="texte_content2">
+									<div class="nom_cv" ng-bind-html='val.nom + " " + val.prenom'></div>
+									<div class="poste_cv" ng-bind-html='val.poste'></div>
+									<div class="recomanded">
+										Recommad&eacute;{{(val.civilite.toLowerCase() == 'madame')?"e":""}} par : <a ng-click='seeprofil(val.recommandeId,val.recommandeMail)' ng-bind-html='val.recommande'></a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="cloud2">
+							<div class="picto_cloud" ng-click='tracePage(73,val.prenom + " " + val.nom + " - T&eacute;l&eacute;chargement cv",true);openUrl(val.cv);'></div>
+						</div>
+					</div>
+					<div class="between2" ng-bind-html='escapedHtml(val.texte)' id='t'></div>
+					<div class="base_line2">
+						<div class="fleche"></div>
+						<div class="date_publication">
+							Posté le {{parseDate(val.date)}}
+						</div>
+					</div>
+				</div>
+				<div class="spacer"></div></div>
+				<div ng-if='!_is_connected'>
+                <div class='spacer'></div>
+                <div ng-include='"views/hors-ligne.html"'></div>
+            </div>
+			</div>
+			<div class="switch">
+				<div class="btn_agenda" >
+						CVth&egrave;que
+				</div>
+				<div class="btn_filactu" ng-click="open()">
+						Cabinets de recrutements
+				</div>
+			</div>
+
+		</div>
+
+	</body>
+	
+	<script type="text/javascript" id="dynJS" src="js_pages/width_inf/carriere.js"></script>
+
+</html>

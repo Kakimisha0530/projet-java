@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<!--<link rel="stylesheet" type="text/css" id="dyn"/>-->
+		<script>
+			//$("link#dyn").attr("href", "css_pages/" + ((larg < 500)?"width_inf":"width_sup")+ "/agenda.css");
+			//$("script#dynJS").attr("src", "js_pages/" + ((larg < 500)?"width_inf":"width_sup")+ "/agenda.js");
+			/*{
+				rel : "stylesheet",
+				type : "text/css",
+				href : 
+			}).appendTo("head");*/
+		</script>
+		<!--<script>
+			$("<link/>", {
+				rel : "stylesheet",
+				type : "text/css",
+				href : "css_pages/" + ((larg < 500)?"width_inf":"width_sup")+ "/agenda.css"
+			}).appendTo("head");
+		</script>-->
+		<link rel="stylesheet" media="screen and (max-width: 500px)" href="css_pages/width_inf/agenda.css" type="text/css" />
+		<link rel="stylesheet" media="screen and (min-width: 501px)" href="css_pages/width_sup/agenda.css" type="text/css" />
+	</head>
+
+	<body>
+
+		<div class="white"></div>
+
+		<div class="view_content {{flou}}">
+
+			<div class="header">
+				<div class="btn_panel_left" onclick="openL();"></div>
+				<div class="rub">
+					agenda
+				</div>
+				<div class="btn_panel_right" style='background-image: url("{{user_profil.avatar}}")' onclick="openR();"></div>
+			</div>
+			<div class="slider" data-snap-ignore="true">
+				<div ng-include='"views/slider.html"'></div>
+			</div>
+			<div class="swipe_button">
+				<div class="swipe_touch {{mySwiper.class}}" ng-click='up()'></div>
+			</div>
+
+			<div class="cache_loader" ng-show='loading'>
+				<div class="loader">
+					<img src="images/loader.gif" ng-show='loading'/>
+				</div>
+			</div>
+
+			<div id='main' class="main" data-snap-ignore='true'>
+				<div class="wrap_year">
+
+					<div class='year_slide'>
+						<div class='annee'>
+							<input class='myslide' type='text' value="0" style='display: none;'/>
+							<div id='moisList'>
+								<table class="agenda_year">
+									<tr>
+										<td class="head_table" colspan="4">
+										<div class="date_content">
+											<div class='year'>
+												{{annee0.date}}
+											</div>
+										</div></td>
+									</tr>
+									<tr>
+										<td class='cel {{annee0.m0.class}}'  id='{{annee0.m0.id}}'><div class="agenda_picto"></div>JANVIER</td>
+										<td class='cel {{annee0.m1.class}}'  id='{{annee0.m1.id}}'><div class="agenda_picto"></div>FEVRIER</td>
+										<td class='cel {{annee0.m2.class}}'  id='{{annee0.m2.id}}'><div class="agenda_picto"></div>MARS</td>
+										<td class='cel {{annee0.m3.class}}'  id='{{annee0.m3.id}}'><div class="agenda_picto"></div>AVRIL</td>
+									</tr>
+									<tr>
+										<td class='cel {{annee0.m4.class}}'  id='{{annee0.m4.id}}'><div class="agenda_picto"></div>MAI</td>
+										<td class='cel {{annee0.m5.class}}' id='{{annee0.m5.id}}'><div class="agenda_picto"></div>JUIN</td>
+										<td class='cel {{annee0.m6.class}}'  id='{{annee0.m6.id}}'><div class="agenda_picto"></div>JUILLET</td>
+										<td class='cel {{annee0.m7.class}}' id='{{annee0.m7.id}}'><div class="agenda_picto"></div>AOUT</td>
+									</tr>
+									<tr>
+										<td class='cel {{annee0.m8.class}}' id='{{annee0.m8.id}}' ><div class="agenda_picto"></div>SEPTEMBRE</td>
+										<td class='cel {{annee0.m9.class}}' id='{{annee0.m9.id}}' ><div class="agenda_picto"></div>OCTOBRE</td>
+										<td class='cel {{annee0.m10.class}}' id='{{annee0.m10.id}}' ><div class="agenda_picto"></div>NOVEMBRE</td>
+										<td class='cel {{annee0.m11.class}}'  id='{{annee0.m11.id}}'><div class="agenda_picto"></div>DECEMBRE</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+						<div class='annee'>
+							<input class='myslide' type='text' value="1" style='display: none;'/>
+							<div id='moisList'>
+								<table class="agenda_year">
+									<tr>
+										<td class="head_table" colspan="4">
+										<div class="date_content">
+											<div class='year'>
+												{{annee.date}}
+											</div>
+										</div></td>
+									</tr>
+									<tr>
+										<td class='cel {{annee.m0.class}}'  id='{{annee.m0.id}}'><div class="agenda_picto"></div>JANVIER</td>
+										<td class='cel {{annee.m1.class}}'  id='{{annee.m1.id}}'><div class="agenda_picto"></div>FEVRIER</td>
+										<td class='cel {{annee.m2.class}}'  id='{{annee.m2.id}}'><div class="agenda_picto"></div>MARS</td>
+										<td class='cel {{annee.m3.class}}'  id='{{annee.m3.id}}'><div class="agenda_picto"></div>AVRIL</td>
+									</tr>
+									<tr>
+										<td class='cel {{annee.m4.class}}'  id='{{annee.m4.id}}'><div class="agenda_picto"></div>MAI</td>
+										<td class='cel {{annee.m5.class}}' id='{{annee.m5.id}}'><div class="agenda_picto"></div>JUIN</td>
+										<td class='cel {{annee.m6.class}}'  id='{{annee.m6.id}}'><div class="agenda_picto"></div>JUILLET</td>
+										<td class='cel {{annee.m7.class}}' id='{{annee.m7.id}}'><div class="agenda_picto"></div>AOUT</td>
+									</tr>
+									<tr>
+										<td class='cel {{annee.m8.class}}' id='{{annee.m8.id}}' ><div class="agenda_picto"></div>SEPTEMBRE</td>
+										<td class='cel {{annee.m9.class}}' id='{{annee.m9.id}}' ><div class="agenda_picto"></div>OCTOBRE</td>
+										<td class='cel {{annee.m10.class}}' id='{{annee.m10.id}}' ><div class="agenda_picto"></div>NOVEMBRE</td>
+										<td class='cel {{annee.m11.class}}'  id='{{annee.m11.id}}'><div class="agenda_picto"></div>DECEMBRE</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+						<div class='annee'>
+							<input class='myslide' type='text' value="2" style='display: none;'/>
+							<div id='moisList'>
+								<table class="agenda_year">
+									<tr>
+										<td class="head_table" colspan="4">
+										<div class="date_content">
+											<div class='year'>
+												{{annee1.date}}
+											</div>
+										</div></td>
+									</tr>
+									<tr>
+										<td class='cel {{annee1.m0.class}}'  id='{{annee1.m0.id}}'><div class="agenda_picto"></div>JANVIER</td>
+										<td class='cel {{annee1.m1.class}}'  id='{{annee1.m1.id}}'><div class="agenda_picto"></div>FEVRIER</td>
+										<td class='cel {{annee1.m2.class}}' id='{{annee1.m2.id}}'><div class="agenda_picto"></div>MARS</td>
+										<td class='cel {{annee1.m3.class}}'  id='{{annee1.m3.id}}'><div class="agenda_picto"></div>AVRIL</td>
+									</tr>
+									<tr>
+										<td class='cel {{annee1.m4.class}}'  id='{{annee1.m4.id}}'><div class="agenda_picto"></div>MAI</td>
+										<td class='cel {{annee1.m5.class}}' id='{{annee1.m5.id}}'><div class="agenda_picto"></div>JUIN</td>
+										<td class='cel {{annee1.m6.class}}'  id='{{annee1.m6.id}}'><div class="agenda_picto"></div>JUILLET</td>
+										<td class='cel {{annee1.m7.class}}' id='{{annee1.m7.id}}'><div class="agenda_picto"></div>AOUT</td>
+									</tr>
+									<tr>
+										<td class='cel {{annee1.m8.class}}' id='{{annee1.m8.id}}' ><div class="agenda_picto"></div>SEPTEMBRE</td>
+										<td class='cel {{annee1.m9.class}}' id='{{annee1.m9.id}}' ><div class="agenda_picto"></div>OCTOBRE</td>
+										<td class='cel {{annee1.m10.class}}' id='{{annee1.m10.id}}' ><div class="agenda_picto"></div>NOVEMBRE</td>
+										<td class='cel {{annee1.m11.class}}'  id='{{annee1.m11.id}}'><div class="agenda_picto"></div>DECEMBRE</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="wrap_month">
+
+					<div class='month_slide'>
+						<div id='calendar'>
+							<table class="agenda_month">
+								<tbody>
+									<tr>
+										<td colspan="7" class="week">
+										<table class="weektable">
+											<tbody>
+												<tr>
+													<td colspan="7">
+													<div class="date_content" onclick='viewAnnee();'>
+														<div class="mois">
+															{{moisList.m1.mois}}
+														</div>
+														<div class="year">
+															{{moisList.m1.annee}}
+														</div>
+													</div></td>
+												</tr>
+												<tr class="semaine">
+													<td>L</td><td>M</td><td>M</td><td>J</td><td>V</td><td>S</td><td>D</td>
+												</tr>
+											</tbody>
+										</table></td>
+									</tr>
+									<tr ng-repeat='sem in moisList.m1.sem_list'>
+										<td ng-repeat='(key,val) in sem' class="celbis {{val.class}}" ng-click='seeEvents(val.date,moisList.m1.num)'>{{val.day}}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div id='calendar'>
+							<table class="agenda_month">
+								<tbody>
+									<tr>
+										<td colspan="7" class="week">
+										<table class="weektable">
+											<tbody>
+												<tr>
+													<td colspan="7">
+													<div class="date_content" onclick='viewAnnee();'>
+														<div class="mois">
+															{{moisList.m2.mois}}
+
+														</div>
+														<div class="year">
+															{{moisList.m2.annee}}
+														</div>
+													</div></td>
+												</tr>
+												<tr class="semaine">
+													<td>L</td><td>M</td><td>M</td><td>J</td><td>V</td><td>S</td><td>D</td>
+												</tr>
+											</tbody>
+										</table></td>
+									</tr>
+									<tr ng-repeat='sem in moisList.m2.sem_list'>
+										<td ng-repeat='(key,val) in sem' class="celbis {{val.class}}" ng-click='seeEvents(val.date,moisList.m2.num)'>{{val.day}}</td>
+									</tr>
+								</tbody>
+							</table>
+
+						</div>
+						<div id='calendar'>
+							<table class="agenda_month">
+								<tbody>
+									<tr>
+										<td colspan="7" class="week">
+										<table class="weektable">
+											<tbody>
+												<tr>
+													<td colspan="7">
+													<div class="date_content" onclick='viewAnnee();'>
+														<div class="mois">
+															{{moisList.m3.mois}}
+														</div>
+														<div class="year">
+															{{moisList.m3.annee}}
+														</div>
+													</div></td>
+												</tr>
+												<tr class="semaine">
+													<td>L</td><td>M</td><td>M</td><td>J</td><td>V</td><td>S</td><td>D</td>
+												</tr>
+											</tbody>
+										</table></td>
+									</tr>
+									<tr ng-repeat='sem in moisList.m3.sem_list'>
+										<td ng-repeat='(key,val) in sem' class="celbis {{val.class}}" ng-click='seeEvents(val.date,moisList.m3.num)'>{{val.day}}</td>
+									</tr>
+								</tbody>
+							</table>
+
+						</div>
+						<div id='calendar'>
+							<table class="agenda_month">
+								<tbody>
+									<tr>
+										<td colspan="7" class="week">
+										<table class="weektable">
+											<tbody>
+												<tr>
+													<td colspan="7">
+													<div class="date_content" onclick='viewAnnee();'>
+														<div class="mois">
+															{{moisList.m4.mois}}
+
+														</div>
+														<div class="year">
+															{{moisList.m4.annee}}
+														</div>
+													</div></td>
+												</tr>
+												<tr class="semaine">
+													<td>L</td><td>M</td><td>M</td><td>J</td><td>V</td><td>S</td><td>D</td>
+												</tr>
+											</tbody>
+										</table></td>
+									</tr>
+									<tr ng-repeat='sem in moisList.m4.sem_list'>
+										<td ng-repeat='(key,val) in sem' class="celbis {{val.class}}" ng-click='seeEvents(val.date,moisList.m4.num)'>{{val.day}}</td>
+									</tr>
+								</tbody>
+							</table>
+
+						</div>
+						<div id='calendar'>
+							<table class="agenda_month">
+								<tbody>
+									<tr>
+										<td colspan="7" class="week">
+										<table class="weektable">
+											<tbody>
+												<tr>
+													<td colspan="7">
+													<div class="date_content" onclick='viewAnnee();'>
+														<div class="mois">
+															{{moisList.m5.mois}}
+
+														</div>
+														<div class="year">
+															{{moisList.m5.annee}}
+														</div>
+													</div></td>
+												</tr>
+												<tr class="semaine">
+													<td>L</td><td>M</td><td>M</td><td>J</td><td>V</td><td>S</td><td>D</td>
+												</tr>
+											</tbody>
+										</table></td>
+									</tr>
+									<tr ng-repeat='sem in moisList.m5.sem_list'>
+										<td ng-repeat='(key,val) in sem' class="celbis {{val.class}}" ng-click='seeEvents(val.date,moisList.m5.num)'>{{val.day}}</td>
+									</tr>
+								</tbody>
+							</table>
+
+						</div>
+						<div id='calendar'>
+							<table class="agenda_month">
+								<tbody>
+									<tr>
+										<td colspan="7" class="week">
+										<table class="weektable">
+											<tbody>
+												<tr>
+													<td colspan="7">
+													<div class="date_content" onclick='viewAnnee();'>
+														<div class="mois">
+															{{moisList.m6.mois}}
+
+														</div>
+														<div class="year">
+															{{moisList.m6.annee}}
+														</div>
+													</div></td>
+												</tr>
+												<tr class="semaine">
+													<td>L</td><td>M</td><td>M</td><td>J</td><td>V</td><td>S</td><td>D</td>
+												</tr>
+											</tbody>
+										</table></td>
+									</tr>
+									<tr ng-repeat='sem in moisList.m6.sem_list'>
+										<td ng-repeat='(key,val) in sem' class="celbis {{val.class}}" ng-click='seeEvents(val.date,moisList.m6.num)'>{{val.day}}</td>
+									</tr>
+								</tbody>
+							</table>
+
+						</div>
+						<div id='calendar'>
+							<table class="agenda_month">
+								<tbody>
+									<tr>
+										<td colspan="7" class="week">
+										<table class="weektable">
+											<tbody>
+												<tr>
+													<td colspan="7">
+													<div class="date_content" onclick='viewAnnee();'>
+														<div class="mois">
+															{{moisList.m7.mois}}
+
+														</div>
+														<div class="year">
+															{{moisList.m7.annee}}
+														</div>
+													</div></td>
+												</tr>
+												<tr class="semaine">
+													<td>L</td><td>M</td><td>M</td><td>J</td><td>V</td><td>S</td><td>D</td>
+												</tr>
+											</tbody>
+										</table></td>
+									</tr>
+									<tr ng-repeat='sem in moisList.m7.sem_list'>
+										<td ng-repeat='(key,val) in sem' class="celbis {{val.class}}" ng-click='seeEvents(val.date,moisList.m7.num)'>{{val.day}}</td>
+									</tr>
+								</tbody>
+							</table>
+
+						</div>
+						<div id='calendar'>
+							<table class="agenda_month">
+								<tbody>
+									<tr>
+										<td colspan="7" class="week">
+										<table class="weektable">
+											<tbody>
+												<tr>
+													<td colspan="7">
+													<div class="date_content" onclick='viewAnnee();'>
+														<div class="mois">
+															{{moisList.m8.mois}}
+
+														</div>
+														<div class="year">
+															{{moisList.m8.annee}}
+														</div>
+													</div></td>
+												</tr>
+												<tr class="semaine">
+													<td>L</td><td>M</td><td>M</td><td>J</td><td>V</td><td>S</td><td>D</td>
+												</tr>
+											</tbody>
+										</table></td>
+									</tr>
+									<tr ng-repeat='sem in moisList.m8.sem_list'>
+										<td ng-repeat='(key,val) in sem' class="celbis {{val.class}}" ng-click='seeEvents(val.date,moisList.m8.num)'>{{val.day}}</td>
+									</tr>
+								</tbody>
+							</table>
+
+						</div>
+						<div id='calendar'>
+							<table class="agenda_month">
+								<tbody>
+									<tr>
+										<td colspan="7" class="week">
+										<table class="weektable">
+											<tbody>
+												<tr>
+													<td colspan="7">
+													<div class="date_content" onclick='viewAnnee();'>
+														<div class="mois">
+															{{moisList.m9.mois}}
+
+														</div>
+														<div class="year">
+															{{moisList.m9.annee}}
+														</div>
+													</div></td>
+												</tr>
+												<tr class="semaine">
+													<td>L</td><td>M</td><td>M</td><td>J</td><td>V</td><td>S</td><td>D</td>
+												</tr>
+											</tbody>
+										</table></td>
+									</tr>
+									<tr ng-repeat='sem in moisList.m9.sem_list'>
+										<td ng-repeat='(key,val) in sem' class="celbis {{val.class}}" ng-click='seeEvents(val.date,moisList.m9.num)'>{{val.day}}</td>
+									</tr>
+								</tbody>
+							</table>
+
+						</div>
+						<div id='calendar'>
+							<table class="agenda_month">
+								<tbody>
+									<tr>
+										<td colspan="7" class="week">
+										<table class="weektable">
+											<tbody>
+												<tr>
+													<td colspan="7">
+													<div class="date_content" onclick='viewAnnee();'>
+														<div class="mois">
+															{{moisList.m10.mois}}
+
+														</div>
+														<div class="year">
+															{{moisList.m10.annee}}
+														</div>
+													</div></td>
+												</tr>
+												<tr class="semaine">
+													<td>L</td><td>M</td><td>M</td><td>J</td><td>V</td><td>S</td><td>D</td>
+												</tr>
+											</tbody>
+										</table></td>
+									</tr>
+									<tr ng-repeat='sem in moisList.m10.sem_list'>
+										<td ng-repeat='(key,val) in sem' class="celbis {{val.class}}" ng-click='seeEvents(val.date,moisList.m10.num)'>{{val.day}}</td>
+									</tr>
+								</tbody>
+							</table>
+
+						</div>
+						<div id='calendar'>
+							<table class="agenda_month">
+								<tbody>
+									<tr>
+										<td colspan="7" class="week">
+										<table class="weektable">
+											<tbody>
+												<tr>
+													<td colspan="7">
+													<div class="date_content" onclick='viewAnnee();'>
+														<div class="mois">
+															{{moisList.m11.mois}}
+
+														</div>
+														<div class="year">
+															{{moisList.m11.annee}}
+														</div>
+													</div></td>
+												</tr>
+												<tr class="semaine">
+													<td>L</td><td>M</td><td>M</td><td>J</td><td>V</td><td>S</td><td>D</td>
+												</tr>
+											</tbody>
+										</table></td>
+									</tr>
+									<tr ng-repeat='sem in moisList.m11.sem_list'>
+										<td ng-repeat='(key,val) in sem' class="celbis {{val.class}}" ng-click='seeEvents(val.date,moisList.m11.num)'>{{val.day}}</td>
+									</tr>
+								</tbody>
+							</table>
+
+						</div>
+						<div id='calendar'>
+							<table class="agenda_month">
+								<tbody>
+									<tr>
+										<td colspan="7" class="week">
+										<table class="weektable">
+											<tbody>
+												<tr>
+													<td colspan="7">
+													<div class="date_content" onclick='viewAnnee();'>
+														<div class="mois">
+															{{moisList.m12.mois}}
+
+														</div>
+														<div class="year">
+															{{moisList.m12.annee}}
+														</div>
+													</div></td>
+												</tr>
+												<tr class="semaine">
+													<td>L</td><td>M</td><td>M</td><td>J</td><td>V</td><td>S</td><td>D</td>
+												</tr>
+											</tbody>
+										</table></td>
+									</tr>
+									<tr ng-repeat='sem in moisList.m12.sem_list'>
+										<td ng-repeat='(key,val) in sem' class="celbis {{val.class}}" ng-click='seeEvents(val.date,moisList.m12.num)'>{{val.day}}</td>
+									</tr>
+								</tbody>
+							</table>
+
+						</div>
+						<div id='calendar'>
+							<table class="agenda_month">
+								<tbody>
+									<tr>
+										<td colspan="7" class="week">
+										<table class="weektable">
+											<tbody>
+												<tr>
+													<td colspan="7">
+													<div class="date_content" onclick='viewAnnee();'>
+														<div class="mois">
+															{{moisList.m13.mois}}
+
+														</div>
+														<div class="year">
+															{{moisList.m13.annee}}
+														</div>
+													</div></td>
+												</tr>
+												<tr class="semaine">
+													<td>L</td><td>M</td><td>M</td><td>J</td><td>V</td><td>S</td><td>D</td>
+												</tr>
+											</tbody>
+										</table></td>
+									</tr>
+									<tr ng-repeat='sem in moisList.m13.sem_list'>
+										<td ng-repeat='(key,val) in sem' class="celbis {{val.class}}" ng-click='seeEvents(val.date,moisList.m13.num)'>{{val.day}}</td>
+									</tr>
+								</tbody>
+							</table>
+
+						</div>
+						<div id='calendar'>
+							<table class="agenda_month">
+								<tbody>
+									<tr>
+										<td colspan="7" class="week">
+										<table class="weektable">
+											<tbody>
+												<tr>
+													<td colspan="7">
+													<div class="date_content" onclick='viewAnnee();'>
+														<div class="mois">
+															{{moisList.m14.mois}}
+
+														</div>
+														<div class="year">
+															{{moisList.m14.annee}}
+														</div>
+													</div></td>
+												</tr>
+												<tr class="semaine">
+													<td>L</td><td>M</td><td>M</td><td>J</td><td>V</td><td>S</td><td>D</td>
+												</tr>
+											</tbody>
+										</table></td>
+									</tr>
+									<tr ng-repeat='sem in moisList.m14.sem_list'>
+										<td ng-repeat='(key,val) in sem' class="celbis {{val.class}}" ng-click='seeEvents(val.date,moisList.m14.num)'>{{val.day}}</td>
+									</tr>
+								</tbody>
+							</table>
+
+						</div>
+						<div id='calendar'>
+							<table class="agenda_month">
+								<tbody>
+									<tr>
+										<td colspan="7" class="week">
+										<table class="weektable">
+											<tbody>
+												<tr>
+													<td colspan="7">
+													<div class="date_content" onclick='viewAnnee();'>
+														<div class="mois">
+															{{moisList.m15.mois}}
+
+														</div>
+														<div class="year">
+															{{moisList.m15.annee}}
+														</div>
+													</div></td>
+												</tr>
+												<tr class="semaine">
+													<td>L</td><td>M</td><td>M</td><td>J</td><td>V</td><td>S</td><td>D</td>
+												</tr>
+											</tbody>
+										</table></td>
+									</tr>
+									<tr ng-repeat='sem in moisList.m15.sem_list'>
+										<td ng-repeat='(key,val) in sem' class="celbis {{val.class}}" ng-click='seeEvents(val.date,moisList.m15.num)'>{{val.day}}</td>
+									</tr>
+								</tbody>
+							</table>
+
+						</div>
+						<div id='calendar'>
+							<table class="agenda_month">
+								<tbody>
+									<tr>
+										<td colspan="7" class="week">
+										<table class="weektable">
+											<tbody>
+												<tr>
+													<td colspan="7">
+													<div class="date_content" onclick='viewAnnee();'>
+														<div class="mois">
+															{{moisList.m16.mois}}
+
+														</div>
+														<div class="year">
+															{{moisList.m16.annee}}
+														</div>
+													</div></td>
+												</tr>
+												<tr class="semaine">
+													<td>L</td><td>M</td><td>M</td><td>J</td><td>V</td><td>S</td><td>D</td>
+												</tr>
+											</tbody>
+										</table></td>
+									</tr>
+									<tr ng-repeat='sem in moisList.m16.sem_list'>
+										<td ng-repeat='(key,val) in sem' class="celbis {{val.class}}" ng-click='seeEvents(val.date,moisList.m16.num)'>{{val.day}}</td>
+									</tr>
+								</tbody>
+							</table>
+
+						</div>
+						<div id='calendar'>
+							<table class="agenda_month">
+								<tbody>
+									<tr>
+										<td colspan="7" class="week">
+										<table class="weektable">
+											<tbody>
+												<tr>
+													<td colspan="7">
+													<div class="date_content" onclick='viewAnnee();'>
+														<div class="mois">
+															{{moisList.m17.mois}}
+
+														</div>
+														<div class="year">
+															{{moisList.m17.annee}}
+														</div>
+													</div></td>
+												</tr>
+												<tr class="semaine">
+													<td>L</td><td>M</td><td>M</td><td>J</td><td>V</td><td>S</td><td>D</td>
+												</tr>
+											</tbody>
+										</table></td>
+									</tr>
+									<tr ng-repeat='sem in moisList.m17.sem_list'>
+										<td ng-repeat='(key,val) in sem' class="celbis {{val.class}}" ng-click='seeEvents(val.date,moisList.m17.num)'>{{val.day}}</td>
+									</tr>
+								</tbody>
+							</table>
+
+						</div>
+						<div id='calendar'>
+							<table class="agenda_month">
+								<tbody>
+									<tr>
+										<td colspan="7" class="week">
+										<table class="weektable">
+											<tbody>
+												<tr>
+													<td colspan="7">
+													<div class="date_content" onclick='viewAnnee();'>
+														<div class="mois">
+															{{moisList.m18.mois}}
+
+														</div>
+														<div class="year">
+															{{moisList.m18.annee}}
+														</div>
+													</div></td>
+												</tr>
+												<tr class="semaine">
+													<td>L</td><td>M</td><td>M</td><td>J</td><td>V</td><td>S</td><td>D</td>
+												</tr>
+											</tbody>
+										</table></td>
+									</tr>
+									<tr ng-repeat='sem in moisList.m18.sem_list'>
+										<td ng-repeat='(key,val) in sem' class="celbis {{val.class}}" ng-click='seeEvents(val.date,moisList.m18.num)'>{{val.day}}</td>
+									</tr>
+								</tbody>
+							</table>
+
+						</div>
+						<div id='calendar'>
+							<table class="agenda_month">
+								<tbody>
+									<tr>
+										<td colspan="7" class="week">
+										<table class="weektable">
+											<tbody>
+												<tr>
+													<td colspan="7">
+													<div class="date_content" onclick='viewAnnee();'>
+														<div class="mois">
+															{{moisList.m19.mois}}
+
+														</div>
+														<div class="year">
+															{{moisList.m19.annee}}
+														</div>
+													</div></td>
+												</tr>
+												<tr class="semaine">
+													<td>L</td><td>M</td><td>M</td><td>J</td><td>V</td><td>S</td><td>D</td>
+												</tr>
+											</tbody>
+										</table></td>
+									</tr>
+									<tr ng-repeat='sem in moisList.m19.sem_list'>
+										<td ng-repeat='(key,val) in sem' class="celbis {{val.class}}" ng-click='seeEvents(val.date,moisList.m19.num)'>{{val.day}}</td>
+									</tr>
+								</tbody>
+							</table>
+
+						</div>
+						<div id='calendar'>
+							<table class="agenda_month">
+								<tbody>
+									<tr>
+										<td colspan="7" class="week">
+										<table class="weektable">
+											<tbody>
+												<tr>
+													<td colspan="7">
+													<div class="date_content" onclick='viewAnnee();'>
+														<div class="mois">
+															{{moisList.m20.mois}}
+
+														</div>
+														<div class="year">
+															{{moisList.m20.annee}}
+														</div>
+													</div></td>
+												</tr>
+												<tr class="semaine">
+													<td>L</td><td>M</td><td>M</td><td>J</td><td>V</td><td>S</td><td>D</td>
+												</tr>
+											</tbody>
+										</table></td>
+									</tr>
+									<tr ng-repeat='sem in moisList.m20.sem_list'>
+										<td ng-repeat='(key,val) in sem' class="celbis {{val.class}}" ng-click='seeEvents(val.date,moisList.m20.num)'>{{val.day}}</td>
+									</tr>
+								</tbody>
+							</table>
+
+						</div>
+						<div id='calendar'>
+							<table class="agenda_month">
+								<tbody>
+									<tr>
+										<td colspan="7" class="week">
+										<table class="weektable">
+											<tbody>
+												<tr>
+													<td colspan="7">
+													<div class="date_content" onclick='viewAnnee();'>
+														<div class="mois">
+															{{moisList.m21.mois}}
+
+														</div>
+														<div class="year">
+															{{moisList.m21.annee}}
+														</div>
+													</div></td>
+												</tr>
+												<tr class="semaine">
+													<td>L</td><td>M</td><td>M</td><td>J</td><td>V</td><td>S</td><td>D</td>
+												</tr>
+											</tbody>
+										</table></td>
+									</tr>
+									<tr ng-repeat='sem in moisList.m21.sem_list'>
+										<td ng-repeat='(key,val) in sem' class="celbis {{val.class}}" ng-click='seeEvents(val.date,moisList.m21.num)'>{{val.day}}</td>
+									</tr>
+								</tbody>
+							</table>
+
+						</div>
+						<div id='calendar'>
+							<table class="agenda_month">
+								<tbody>
+									<tr>
+										<td colspan="7" class="week">
+										<table class="weektable">
+											<tbody>
+												<tr>
+													<td colspan="7">
+													<div class="date_content" onclick='viewAnnee();'>
+														<div class="mois">
+															{{moisList.m22.mois}}
+
+														</div>
+														<div class="year">
+															{{moisList.m22.annee}}
+														</div>
+													</div></td>
+												</tr>
+												<tr class="semaine">
+													<td>L</td><td>M</td><td>M</td><td>J</td><td>V</td><td>S</td><td>D</td>
+												</tr>
+											</tbody>
+										</table></td>
+									</tr>
+									<tr ng-repeat='sem in moisList.m22.sem_list'>
+										<td ng-repeat='(key,val) in sem' class="celbis {{val.class}}" ng-click='seeEvents(val.date,moisList.m22.num)'>{{val.day}}</td>
+									</tr>
+								</tbody>
+							</table>
+
+						</div>
+						<div id='calendar'>
+							<table class="agenda_month">
+								<tbody>
+									<tr>
+										<td colspan="7" class="week">
+										<table class="weektable">
+											<tbody>
+												<tr>
+													<td colspan="7">
+													<div class="date_content" onclick='viewAnnee();'>
+														<div class="mois">
+															{{moisList.m23.mois}}
+
+														</div>
+														<div class="year">
+															{{moisList.m23.annee}}
+														</div>
+													</div></td>
+												</tr>
+												<tr class="semaine">
+													<td>L</td><td>M</td><td>M</td><td>J</td><td>V</td><td>S</td><td>D</td>
+												</tr>
+											</tbody>
+										</table></td>
+									</tr>
+									<tr ng-repeat='sem in moisList.m23.sem_list'>
+										<td ng-repeat='(key,val) in sem' class="celbis {{val.class}}" ng-click='seeEvents(val.date,moisList.m23.num)'>{{val.day}}</td>
+									</tr>
+								</tbody>
+							</table>
+
+						</div>
+						<div id='calendar'>
+							<table class="agenda_month">
+								<tbody>
+									<tr>
+										<td colspan="7" class="week">
+										<table class="weektable">
+											<tbody>
+												<tr>
+													<td colspan="7">
+													<div class="date_content" onclick='viewAnnee();'>
+														<div class="mois">
+															{{moisList.m24.mois}}
+
+														</div>
+														<div class="year">
+															{{moisList.m24.annee}}
+														</div>
+													</div></td>
+												</tr>
+												<tr class="semaine">
+													<td>L</td><td>M</td><td>M</td><td>J</td><td>V</td><td>S</td><td>D</td>
+												</tr>
+											</tbody>
+										</table></td>
+									</tr>
+									<tr ng-repeat='sem in moisList.m24.sem_list'>
+										<td ng-repeat='(key,val) in sem' class="celbis {{val.class}}" ng-click='seeEvents(val.date,moisList.m24.num)'>{{val.day}}</td>
+									</tr>
+								</tbody>
+							</table>
+
+						</div>
+						<div id='calendar'>
+							<table class="agenda_month">
+								<tbody>
+									<tr>
+										<td colspan="7" class="week">
+										<table class="weektable">
+											<tbody>
+												<tr>
+													<td colspan="7">
+													<div class="date_content" onclick='viewAnnee();'>
+														<div class="mois">
+															{{moisList.m25.mois}}
+
+														</div>
+														<div class="year">
+															{{moisList.m25.annee}}
+														</div>
+													</div></td>
+												</tr>
+												<tr class="semaine">
+													<td>L</td><td>M</td><td>M</td><td>J</td><td>V</td><td>S</td><td>D</td>
+												</tr>
+											</tbody>
+										</table></td>
+									</tr>
+									<tr ng-repeat='sem in moisList.m25.sem_list'>
+										<td ng-repeat='(key,val) in sem' class="celbis {{val.class}}" ng-click='seeEvents(val.date,moisList.m25.num)'>{{val.day}}</td>
+									</tr>
+								</tbody>
+							</table>
+
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+
+			<div class="switch">
+				<div class="btn_filactu" ng-click="open(1);">
+						fil d'actualités
+				</div>
+				<div class="btn_agenda">
+						agenda
+				</div>
+			</div>
+
+		</div>
+
+		<div class="list_event_agenda" ng-show='event_list'>
+			<div class="back_agenda" ng-click = 'back()'></div>
+			<div class="cache_agenda">
+				<div class="placement_center">
+					<div class='wrap_agenda cate{{val.categorieId}}' ng-repeat='(key,val) in event_list' ng-click = 'detailsEvent(val.id)'>
+						<div class="line3 {{val.class}}">
+							<div class="texte3">
+								<div class="texte_content3">
+									<div class="event" ng-bind-html='val.categorie'></div>
+									<div class="titre_event" ng-bind-html='val.titre'></div>
+									<div class="text_contact" ng-bind-html='val.lieu'></div>
+								</div>
+							</div>
+							<div class="date_content_min">
+								<div class="mois_min">
+									{{getMois(val.debut)}}
+								</div>
+								<div class="year_min" style="color:#000000!important;">
+									{{getJour(val.debut)}}
+								</div>
+							</div>
+						</div>
+						<div class="base_line3">
+							<div class="btn_membres"></div><span class='count_membres'>{{val.participants}}</span>
+							<div class="btn_interv"></div><span class='count_interv'>{{val.intervenants}}</span>
+							<div style='display: none;'>
+								{{val.note}}
+							</div>
+							<div class="btn_map"></div>
+							<div class="btn_coms"></div>
+							<div class="btn_note"></div>
+							<div class="btn_sync"></div>
+							<div class="event_off" ng-if='!val.inscrit' style='background-image: url("images/addevent.svg");'></div>
+							<div class="event_on" ng-if='val.inscrit' style='background-image: url("images/event_on.svg");'></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</body>
+	
+	<script type="text/javascript" id="dynJS" src="js_pages/width_inf/agenda.js"></script>
+
+</html>

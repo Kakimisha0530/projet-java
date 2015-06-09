@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+    	<!--<link rel="stylesheet" type="text/css" id="dyn"/>-->
+		<script>
+			//$("link#dyn").attr("href", "css_pages/" + ((larg < 500)?"width_inf":"width_sup")+ "/editprofil.css");
+			//$("script#dynJS").attr("src", "js_pages/" + ((larg < 500)?"width_inf":"width_sup")+ "/editprofil.js");
+			/*{
+				rel : "stylesheet",
+				type : "text/css",
+				href : 
+			}).appendTo("head");*/
+		</script>
+		<!--<script>
+			$("<link/>", {
+				rel : "stylesheet",
+				type : "text/css",
+				href : "css_pages/" + ((larg < 500)?"width_inf":"width_sup")+ "/editprofil.css"
+			}).appendTo("head");
+		</script>-->
+		<link rel="stylesheet" media="screen and (max-width: 500px)" href="css_pages/width_inf/editprofil.css" type="text/css" />
+		<link rel="stylesheet" media="screen and (min-width: 501px)" href="css_pages/width_sup/editprofil.css" type="text/css" />
+    </head>
+
+    <body>
+        <div ng-controller="parametresCtrl">
+
+        <div class="header" data-snap-ignore="true">
+            <div class="btn_back" ng-click='open()'></div>
+            <div class="rub">
+                paramètres
+            </div>
+        </div>
+        <div class="slider" data-snap-ignore="true">
+                <div ng-include='"views/slider.html"'></div>
+            </div>
+        <div class="swipe_button" data-snap-ignore="true">
+            <div class="swipe_touch {{mySwiper.class}}" ng-click='up()'></div>
+        </div>
+        
+        <div class="cache_loader" ng-show='loading'>
+            <div class="loader">
+                <img src="images/loader.gif" ng-show='loading'/>
+            </div>
+        </div>
+        
+        <div class="main" data-snap-ignore="true">
+        	<div class="editLogo">
+        		<h3>EDITION LOGO</h3>
+        		<p id="Lresult"></p>
+        		<div class="profil_detail_pictosociete"><img id="logo" src="{{user_profil.logo}}"/></div>
+        		<form enctype="multipart/form-data" id='editLogo'>
+                    <input type="button" value="Sélectionner un nouveau logo" id="select_avatar" onclick="getfile()" />
+                    <input type="file" id="hiddenfile" style="display:none" name='img' ACCEPT="image/gif,image/jpeg" />
+                    <input type="text" name="MAX_FILE_SIZE" value="700000" style="display:none"/>
+                    <input type="text" name='token' value='{{token}}' style="display:none">
+                    <input type="text" name='mai' value='{{user_profil.mail}}' style="display:none">
+                    <input type="text" name='id' value='{{user_profil.id}}' style="display:none"/>
+                    <input type='submit' id="modif_avatar" value='VALIDER'/>
+                </form>
+        	</div>
+        	<div style="margin:20px"></div>
+        	<div class="editprofil">
+        		<h3>EDITION PROFIL</h3>
+        		<p id="result"></p>
+        	<form name="userEdit" id="userEdit" onsubmit="editProfil();">
+        		<input type="hidden" id="token" name="token" value="{{token}}">
+        		<input type="hidden" id="mai" name="mai" value="{{user_profil.mail}}">
+        		<input type="hidden" id="id" name="id" value="{{user_profil.id}}">
+        		<input type="hidden" id="host" value="{{hostUrl}}">
+        		<p>
+	        		<label for="phone">Télephone : </label>
+	        		<input type="text" id="phone" name="phone" value="{{user_profil.phone}}">
+        		</p>
+        		<p>
+	        		<label for="portable">Portable : </label>
+	        		<input type="text" id="portable" name="portable" value="{{user_profil.portable}}">
+        		</p>
+        		<p>
+	        		<label for="fax">Fax : </label>
+	        		<input type="text" id="fax" name="fax" value="{{user_profil.fax}}">
+        		</p>
+        		<p>
+	        		<label for="poste">Intitulé du poste : </label>
+	        		<input type="text" id="poste" name="poste" value="{{user_profil.poste}}">
+        		</p>
+        		<p>
+	        		<label for="entree">Date d'entrée au club : </label>
+	        		<input type="date" id="entree" name="entree" value="{{user_profil.entree}}">
+        		</p>
+        		<p>
+	        		<label for="linkedin">Profil LinkedIn : </label>
+	        		<input type="text" id="linkedin" name="linkedin" value="{{user_profil.linkedin}}">
+        		</p>
+        		<p>
+	        		<label for="facebook">Profil Facebook : </label>
+	        		<input type="text" id="facebook" name="facebook" value="{{user_profil.facebook}}">
+        		</p>
+        		<p>
+	        		<label for="twitter">Profil Twitter : </label>
+	        		<input type="text" id="twitter" name="twitter" value="{{user_profil.twitter}}">
+        		</p>
+        		<p>
+	        		<label for="expertise1">Domaine d'expertise 1 : </label>
+	        		<select id="expertise1" name="expertise1">
+	        			<option ng-repeat='val in expertises.liste' value="{{val.id}}" ng-bind-html='val.titre' ng-selected="expertises.exp1 == val.id"></option>
+	        		</select>
+        		</p>
+        		<p>
+	        		<label for="expertise2">Domaine d'expertise 2 : </label>
+	        		<select id="expertise2" name="expertise2" >
+	        			<option ng-repeat='val in expertises.liste' value="{{val.id}}" ng-bind-html='val.titre' ng-selected="expertises.exp2 == val.id"></option>
+	        		</select>
+        		</p>
+        		<p>
+	        		<label for="expertise3">Domaine d'expertise 3 : </label>
+	        		<select id="expertise3" name="expertise3" >
+	        			<option ng-repeat='val in expertises.liste' value="{{val.id}}" ng-bind-html='val.titre' ng-selected="expertises.exp3 == val.id"></option>
+	        		</select>
+        		</p>
+        		<p>
+	        		<label for="expertise4">Domaine d'expertise 4 : </label>
+	        		<select id="expertise4" name="expertise4" >
+	        			<option ng-repeat='val in expertises.liste' value="{{val.id}}" ng-bind-html='val.titre' ng-selected="expertises.exp4 == val.id"></option>
+	        		</select>
+        		</p>
+        		<p>
+	        		<label for="expertise5">Domaine d'expertise 5 : </label>
+	        		<select id="expertise5" name="expertise5" >
+	        			<option ng-repeat='val in expertises.liste' value="{{val.id}}" ng-bind-html='val.titre' ng-selected="expertises.exp5 == val.id"></option>
+	        		</select>
+        		</p>
+        		<p>
+	        		<label for="activite">Secteur d'activité : </label>
+	        		<select id="activite" name="activite" >
+	        			<option ng-repeat='(key,val) in activites.liste' value="{{val.id}}" ng-bind-html='val.titre' ng-selected="activites.value == val.id"></option>
+	        		</select>
+        		</p>
+        		<p>
+	        		<label for="adresse1">Adresse : </label>
+	        		<input type="text" id="adresse1" name="adresse1" value="{{user_profil.adresse1}}">
+	        		<input type="hidden" id="adresse2" name="adresse2" value="">
+        		</p>
+        		<p>
+	        		<label for="ville">Ville : </label>
+	        		<input type="text" id="ville" name="ville" value="{{user_profil.ville}}">
+        		</p>
+        		<p>
+	        		<label for="postal">Code postal : </label>
+	        		<input type="text" id="postal" name="postal" value="{{user_profil.postal}}">
+        		</p>
+        		<p>
+	        		<label for="pays">Pays : </label>
+	        		<select id="pays" name="pays">
+	        			<option ng-repeat='(key,val) in pays.liste' value="{{val.id}}" ng-bind-html='val.titre' ng-selected="pays.value == val.id"></option>
+	        		</select>
+        		</p>
+        		<p>
+	        		<label for="parain">Parain : </label>
+	        		<input type="text" id="parain" name="parain" value="{{user_profil.parrain}}">
+        		</p>
+        		<p>
+	        		<label for="description">Description : </label>
+	        		<textarea rows="4" cols="50" id="description" name="description" ng-bind-html='user_profil.profil'>
+	        		</textarea>
+        		</p>
+        		<p>
+        			<input id="inputValider" type="submit" value="VALIDER">
+        		</p>
+        	</form>
+        	</div>
+        </div>
+    </div>
+        
+    </body>
+	
+	<script type="text/javascript" id="dynJS" src="js_pages/width_inf/editprofil.js"></script>
+</html>

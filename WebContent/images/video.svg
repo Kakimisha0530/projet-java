@@ -1,0 +1,16 @@
+<?xml version="1.0"?><svg width="640" height="480" xmlns="http://www.w3.org/2000/svg">
+ <title>pause</title>
+ <defs>
+  <filter id="filter3316">
+   <feGaussianBlur stdDeviation="0.586716" id="feGaussianBlur3318"/>
+  </filter>
+ </defs>
+ <g>
+  <title>Layer 1</title>
+  <g externalResourcesRequired="false" id="g3368">
+   <path id="svg_11" fill="#000000" fill-rule="evenodd" stroke="#000000" stroke-miterlimit="4" stroke-dashoffset="0" filter="url(#filter3316)" d="m502.89502,252.499908a148.014816,140.613556 0 1 1 -296.029236,0a148.014816,140.613556 0 1 1 296.029236,0z"/>
+   <path id="svg_12" fill="#e6e6e6" fill-rule="evenodd" stroke="#ffffff" stroke-miterlimit="4" stroke-dashoffset="0" stroke-opacity="0.182573" d="m458.936768,253.001755l-82.238159,43.34642l-82.238159,43.346527l0.313446,-87.194794l0.316437,-87.194672l81.921875,43.848297l81.924561,43.848221z"/>
+   <path id="svg_13" opacity="0.5" fill="#ffffff" fill-rule="evenodd" stroke="#000000" stroke-miterlimit="4" stroke-dashoffset="0" stroke-opacity="0.182573" d="m353.552094,114.832703c-79.445343,0.000137 -143.948166,63.019043 -143.948166,140.637772c127.906448,-27.47612 159.05751,-27.838577 287.811874,0c0,-77.618729 -64.418121,-140.637772 -143.863708,-140.637772z"/>
+  </g>
+ </g>
+</svg>

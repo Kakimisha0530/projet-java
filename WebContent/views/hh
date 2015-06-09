@@ -1,0 +1,70 @@
+
+<div class="main div-scroll">
+	<div class="calendar">
+		<table class="DatPick" border="0" cellpadding="0" cellspacing="0">
+				<tr>
+					<td align="center" valign="center" class="btnPrev"><a href="#"
+						onclick="changedate('prevmo')">Prev Mo</a></td>
+					<td align="center" valign="center" colspan="5" class="curentMonth"><select
+						class="select_box" id="choix_mois" onchange="reloadCalendar();"><option
+								value="0">JANVIER</option>
+							<option value="1">FEVRIER</option>
+							<option value="2">MARS</option>
+							<option value="3">AVRIL</option>
+							<option value="4">MAI</option>
+							<option value="5" selected="">JUIN</option>
+							<option value="6">JUILLET</option>
+							<option value="7">AOUT</option>
+							<option value="8">SEPTEMBRE</option>
+							<option value="9">OCTOBRE</option>
+							<option value="10">NOVEMBRE</option>
+							<option value="11">DECEMBRE</option></select><select class="select_box"
+						id="choix_an" onchange="reloadCalendar();"
+						).val()));createcalendar();"=""><option value="2010">2010</option>
+							<option value="2011">2011</option>
+							<option value="2012">2012</option>
+							<option value="2013">2013</option>
+							<option value="2014">2014</option>
+							<option value="2015" selected="">2015</option>
+							<option value="2016">2016</option>
+							<option value="2017">2017</option>
+							<option value="2018">2018</option>
+							<option value="2019">2019</option>
+							<option value="2020">2020</option></select></td>
+					<td align="center" valign="center" class="btnNext"><a href="#"
+						onclick="changedate('nextmo')">Next Mo</a></td>
+				</tr>
+		</table>
+		<table class="DatPick" border="0" cellpadding="0" cellspacing="0" id="day_calendar">
+				<tr>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+				</tr>
+		</table>
+	</div>
+</div>
+<script>
+	$(document).ready(function() {
+		//createCalendar();
+	});
+
+	function LoadCalendarFor(da_str) {
+
+	}
+</script>

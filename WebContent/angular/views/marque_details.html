@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<!--<link rel="stylesheet" type="text/css" id="dyn"/>-->
+		<script>
+			//$("link#dyn").attr("href", "css_pages/" + ((larg < 500)?"width_inf":"width_sup")+ "/marque_details.css");
+			//$("script#dynJS").attr("src", "js_pages/" + ((larg < 500)?"width_inf":"width_sup")+ "/marque_details.js");
+			/*{
+				rel : "stylesheet",
+				type : "text/css",
+				href : 
+			}).appendTo("head");*/
+		</script>
+		<!--<script>
+			$("<link/>", {
+				rel : "stylesheet",
+				type : "text/css",
+				href : "css_pages/" + ((larg < 500)?"width_inf":"width_sup")+ "/marque_details.css"
+			}).appendTo("head");
+		</script>-->
+		<link rel="stylesheet" media="screen and (max-width: 500px)" href="css_pages/width_inf/marque_details.css" type="text/css" />
+		<link rel="stylesheet" media="screen and (min-width: 501px)" href="css_pages/width_sup/marque_details.css" type="text/css" />
+	</head>
+
+	<body>
+
+		<div class="white"></div>
+
+		<div class="view_content">
+
+			<div class="header">
+				<div class="btn_back" ng-click='open()'></div>
+				<div class="rub">
+					une marque d'avance
+				</div>
+				<div class="btn_panel_right" style='background-image: url("{{user_profil.avatar}}")' onclick='openR();'></div>
+			</div>
+			<div class="slider" data-snap-ignore="true">
+				<div ng-include='"views/slider.html"'></div>
+			</div>
+			<div class="swipe_button">
+				<div class="swipe_touch {{mySwiper.class}}" ng-click='up()'></div>
+			</div>
+			
+			<div class="cache_loader" ng-show='loading'>
+				<div class="loader">
+					<img src="images/loader.gif" ng-show='loading'/>
+				</div>
+			</div>
+
+			<div class="main" >
+			    <div ng-if='_is_connected'>
+
+				<div class="photo_marquedetail" style='background-image: url("{{marque.photo}}");'></div>
+				<div class="cate{{marque.catgorieId}}">
+					<div class="infos_marquedetail">
+						<div class="titre_marquedetail" ng-bind-html='marque.titre'></div>
+						<div class="legende_marquedetail">
+							<div class="date_marquedetail">
+								{{parseDate(marque.date)}}
+							</div>
+							<div class="note_marquedetail" style='background-image: url("images/{{marque.note}}_star.svg");'></div>
+						</div>
+						<div class="souligne_marquedetail">
+							<span class="name_contributeur"ng-bind-html='marque.contributeur'></span> - <span class="societe_contributeur" ng-bind-html='marque.societe'></span></span>
+						</div>
+						<div class="baseline_marquedetail">
+							<div class="likebox_marquedetail">
+								<div class="like_btn" onclick="voter();"></div>
+								<div class="like_texte">
+									Noter cet article
+								</div>
+								<!--<div class="logo_marquedetail" style="background-image: url('{{marque.photo}}')"></div>-->
+							</div>
+							<div class="links_medias">
+								<div class="res_pictos" ng-click="tracePage(71,marque.titre + ' - son',true);play_sound(marque.sound)" style="display: {{(marque.sound != '')?'block':'none'}}"><div class="picto_detail_marque son"></div></div>
+								<div class="res_pictos" ng-click="tracePage(70,marque.titre + ' - video',true);play_video(marque)" style="display: {{(marque.video != '' || marque.youtube != '')?'block':'none'}}"><div class="picto_detail_marque video"></div></div>
+								<div class="res_pictos" ng-click="tracePage(72,marque.titre + ' - pdf',true);openUrl(marque.fichier)" style="display: {{(marque.fichier != '')?'block':'none'}}"><div class="picto_detail_marque_bis fichier"></div></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="texte_marquedetail">
+					<div class="wrap_texte_marquedetail" ng-bind-html='marque.texte'></div>
+				</div></div>
+				<div ng-if='!_is_connected'>
+                <div class='spacer'></div>
+                <div ng-include='"views/hors-ligne.html"'></div>
+            </div>
+			</div>
+
+		</div>
+
+	</body>
+	
+	<script type="text/javascript" id="dynJS" src="js_pages/width_inf/marque_details.js"></script>
+
+</html>

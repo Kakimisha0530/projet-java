@@ -1,0 +1,165 @@
+<html lang="fr">
+	<head>
+		<!--<link rel="stylesheet" type="text/css" id="dyn"/>-->
+		<script>
+			//$("link#dyn").attr("href", "css_pages/" + ((larg < 500)?"width_inf":"width_sup")+ "/editpartners.css");
+			//$("script#dynJS").attr("src", "js_pages/" + ((larg < 500)?"width_inf":"width_sup")+ "/editpartners.js");
+			/*{
+				rel : "stylesheet",
+				type : "text/css",
+				href : 
+			}).appendTo("head");*/
+		</script>
+		<!--<script>
+			$("<link/>", {
+				rel : "stylesheet",
+				type : "text/css",
+				href : "css_pages/" + ((larg < 500)?"width_inf":"width_sup")+ "/editpartners.css"
+			}).appendTo("head");
+		</script>-->
+		<link rel="stylesheet" media="screen and (max-width: 500px)" href="css_pages/width_inf/editpartners.css" type="text/css" />
+		<link rel="stylesheet" media="screen and (min-width: 501px)" href="css_pages/width_sup/editpartners.css" type="text/css" />
+	</head>
+	<body>
+
+		<div class="white"></div>
+
+		<div class="view_content">
+
+		<div class="header" data-snap-ignore="true">
+            <div class="btn_back" ng-click='open();'></div>
+            <div class="rub">
+                Mes partenaires
+            </div>
+        </div>
+        <div class="slider" data-snap-ignore="true">
+				<div ng-include='"views/slider.html"'></div>
+			</div>
+			<div class="swipe_button">
+				<div class="swipe_touch {{mySwiper.class}}" ng-click='up()'></div>
+			</div>
+			<div class="search">
+				<input type="text" name="fname" class="formtext_center" ng-model='search' placeholder="nom">
+			</div>
+        
+        <div class="cache_loader" ng-show='loading'>
+            <div class="loader">
+                <img src="images/loader.gif" ng-show='loading'/>
+            </div>
+        </div>
+
+			<div class="main">
+				<div class="main_left">
+				    <div ng-if='_is_connected'>
+					<div class="wrap_list" ng-repeat="partner in partnerslist | filter:search">
+						<div id='{{partner.first}}'>
+							<div class="line5 {{partner._class}}">
+								<!--<div class="picto5">
+									<div class="avatar5" style="background-image: url('{{partner.logo}}');"></div>
+								</div>-->
+								<div class="texte5">
+									<div class="texte_content5">
+										<div class="profil_item_nom" ng-bind-html="partner.nom"></div>
+									</div>
+									<div class="edit edit_off" ng-if='partner.idAssoc <= 0' ng-click='addPartner(partner)' style='background-image: url("images/addevent.svg");'></div>
+                    				<div class="edit edit_on" ng-if='partner.idAssoc > 0' ng-click='delPartner(partner)' style='background-image: url("images/event_on.svg");'></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div></div>
+				<div ng-if='!_is_connected'>
+                <div class='spacer'></div>
+                <div ng-include='"views/hors-ligne.html"'></div>
+            </div>
+			</div>
+			<div class="main_right">
+				<div class="click_letters">
+					<div ng-click='lister("a")'>
+						a
+					</div>
+					<!--<div ng-click='lister("b")'>
+					b
+					</div>-->
+					<div ng-click='lister("c")'>
+						c
+					</div>
+					<!--<div ng-click='lister("d")'>
+					d
+					</div>-->
+					<div ng-click='lister("e")'>
+						e
+					</div>
+					<!--<div ng-click='lister("f")'>
+					f
+					</div>-->
+					<div ng-click='lister("g")'>
+						g
+					</div>
+					<!--<div ng-click='lister("h")'>
+					h
+					</div>-->
+					<div ng-click='lister("i")'>
+						i
+					</div>
+					<!--<div ng-click='lister("j")'>
+					j
+					</div>-->
+					<div ng-click='lister("k")'>
+						k
+					</div>
+					<!--<div ng-click='lister("l")'>
+					l
+					</div>-->
+					<div ng-click='lister("m")'>
+						m
+					</div>
+					<!--<div ng-click='lister("n")'>
+					n
+					</div>-->
+					<div ng-click='lister("o")'>
+						o
+					</div>
+					<!--<div ng-click='lister("p")'>
+					p
+					</div>-->
+					<div ng-click='lister("q")'>
+						q
+					</div>
+					<!--<div ng-click='lister("r")'>
+					r
+					</div>-->
+					<div ng-click='lister("s")'>
+						s
+					</div>
+					<!--<div ng-click='lister("t")'>
+					t
+					</div>-->
+					<div ng-click='lister("u")'>
+						u
+					</div>
+					<!--<div ng-click='lister("v")'>
+					v
+					</div>-->
+					<div ng-click='lister("w")'>
+						w
+					</div>
+					<!--<div ng-click='lister("x")'>
+					x
+					</div>-->
+					<div ng-click='lister("y")'>
+						y
+					</div>
+					<!--<div ng-click='lister("z")'>
+					z
+					</div>-->
+				</div>
+			</div>
+
+		</div>
+
+	</body>
+	
+	<script type="text/javascript" id="dynJS" src="js_pages/width_inf/editpartners.js"></script>
+
+</html>

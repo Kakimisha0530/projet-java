@@ -1,0 +1,87 @@
+<html lang="fr">
+	<head>
+		<!--<link rel="stylesheet" type="text/css" id="dyn"/>-->
+		<script>
+			//$("link#dyn").attr("href", "css_pages/" + ((larg < 500)?"width_inf":"width_sup")+ "/partners_details.css");
+			//$("script#dynJS").attr("src", "js_pages/" + ((larg < 500)?"width_inf":"width_sup")+ "/partners_details.js");
+			/*{
+				rel : "stylesheet",
+				type : "text/css",
+				href : 
+			}).appendTo("head");*/
+		</script>
+		<!--<script>
+			$("<link/>", {
+				rel : "stylesheet",
+				type : "text/css",
+				href : "css_pages/" + ((larg < 500)?"width_inf":"width_sup")+ "/partners_details.css"
+			}).appendTo("head");
+		</script>-->
+		<link rel="stylesheet" media="screen and (max-width: 500px)" href="css_pages/width_inf/partners_details.css" type="text/css" />
+		<link rel="stylesheet" media="screen and (min-width: 501px)" href="css_pages/width_sup/partners_details.css" type="text/css" />
+	</head>
+
+	<body>
+	
+		<div class="white"></div>
+
+		<div class="header">
+			<div class="btn_back" ng-click='open()'></div>
+			<div class="rub">
+				notre réseau
+			</div>
+			<div class="btn_panel_right" style='background-image: url("{{user_profil.avatar}}")' onclick='openR();'></div>
+		</div>
+		<div class="slider" data-snap-ignore="true">
+				<div ng-include='"views/slider.html"'></div>
+			</div>
+		<div class="swipe_button">
+			<div class="swipe_touch {{mySwiper.class}}" ng-click='up()'></div>
+		</div>
+
+		<div class="cache_loader" ng-show='loading'>
+			<div class="loader">
+				<img src="images/loader.gif" ng-show='loading'/>
+			</div>
+		</div>
+
+		<div class="main">
+		    <div ng-if='_is_connected'>
+			<div class="head_detail_partners">
+				<div class="avatar_detail_partners" style='background-image: url("{{partner.logo}}")'></div>
+				<div class="infos_detail_partners">
+					<div class="profil_partners_nom" ng-bind-html="escapedHtml(partner.nom)"></div>
+				</div>
+				<div class="infos_detail_expertises" ng-if='isNotVide(partner.expertise1) || isNotVide(partner.expertise2) || isNotVide(partner.expertise3) || isNotVide(partner.expertise4) || isNotVide(partner.expertise5)'>
+				    	<b>DOMAINE(S) D'EXPERTISE : </b> 
+						<span ng-if='isNotVide(partner.expertise1)' ng-bind-html="escapedHtml(partner.expertise1)"></span><span ng-if='isNotVide(partner.expertise1) && isNotVide(partner.expertise2)'>, </span>
+						<span ng-if='isNotVide(partner.expertise2)' ng-bind-html="escapedHtml(partner.expertise2)"></span><span ng-if='isNotVide(partner.expertise2) && isNotVide(partner.expertise3)'>, </span>
+						<span ng-if='isNotVide(partner.expertise3)' ng-bind-html="escapedHtml(partner.expertise3)"></span><span ng-if='isNotVide(partner.expertise3) && isNotVide(partner.expertise4)'>, </span>
+						<span ng-if='isNotVide(partner.expertise4)' ng-bind-html="escapedHtml(partner.expertise4)"></span><span ng-if='isNotVide(partner.expertise4) && isNotVide(partner.expertise5)'>, </span>
+						<span ng-if='isNotVide(partner.expertise5)' ng-bind-html="escapedHtml(partner.expertise5)"></span>
+				</div>
+			</div>
+			<div class="description_detail_partners" ng-bind-html="escapedHtml(partner.texte)"></div>
+			<div class="list_between">
+				<div class="list_membres">
+					<div class="liste_item {{getNum(key)}}" ng-repeat="(key,val) in assoc">
+						<div class="picto_avatar" style='background-image: url("{{getAvatar(val)}}");'></div>
+						<div class="membre_titre" ng-bind-html='escapedHtml(val.nom  + " " + val.prenom)'></div>
+						<div class="membre_societe" ng-bind-html='escapedHtml(val.societe)'></div>
+						<a ng-if='val.portable != ""' href='tel:{{getphone(val.portable)}}'><div class="picto_phone"></div></a>
+						<a ng-if='val.mail != ""' href='mailto:{{val.mail}}'><div class="picto_mail"></div></a>
+					</div>
+				</div>
+			</div>
+			</div>
+			<div ng-if='!_is_connected'>
+                <div class='spacer'></div>
+                <div ng-include='"views/hors-ligne.html"'></div>
+            </div>
+		</div>
+
+	</body>
+	
+	<script type="text/javascript" id="dynJS" src="js_pages/width_inf/partners_details.js"></script>
+
+</html>

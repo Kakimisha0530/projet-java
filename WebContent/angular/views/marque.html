@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<!--<link rel="stylesheet" type="text/css" id="dyn"/>-->
+		<script>
+			//$("link#dyn").attr("href", "css_pages/" + ((larg < 500)?"width_inf":"width_sup")+ "/marque.css");
+			//$("script#dynJS").attr("src", "js_pages/" + ((larg < 500)?"width_inf":"width_sup")+ "/marque.js");
+			/*{
+				rel : "stylesheet",
+				type : "text/css",
+				href : 
+			}).appendTo("head");*/
+		</script>
+		<!--<script>
+			$("<link/>", {
+				rel : "stylesheet",
+				type : "text/css",
+				href : "css_pages/" + ((larg < 500)?"width_inf":"width_sup")+ "/marque.css"
+			}).appendTo("head");
+		</script>-->
+		<link rel="stylesheet" media="screen and (max-width: 500px)" href="css_pages/width_inf/marque.css" type="text/css" />
+		<link rel="stylesheet" media="screen and (min-width: 501px)" href="css_pages/width_sup/marque.css" type="text/css" />
+	</head>
+
+	<body>
+
+		<div class="white"></div>
+
+		<div class="header">
+			<div class="btn_panel_left" onclick='openL();'></div>
+			<div class="rub">
+				une marque d'avance
+			</div>
+			<div class="btn_panel_right" style='background-image: url("{{user_profil.avatar}}")' onclick='openR();'></div>
+		</div>
+		<div class="slider" data-snap-ignore="true">
+				<div ng-include='"views/slider.html"'></div>
+			</div>
+		<div class="swipe_button">
+			<div class="swipe_touch {{mySwiper.class}}" ng-click='up()'></div>
+		</div>
+
+		<div class="cache_loader" ng-show='loading'>
+			<div class="loader">
+				<img src="images/loader.gif" ng-show='loading'/>
+			</div>
+		</div>
+
+		<div class="main">
+			<div ng-if='_is_connected'>
+				<div class="spacer">
+					<a href="mailto:appli@leclubdesannonceurs.com?subject=Proposition article&body=Ici le texte de votre article" class="post_article"> <div class="post_btn"></div>
+					<div class="post_texte">
+						Une info à partager ?
+					</div> </a>
+				</div>
+				<div class="wrap cate{{doc.categorieId}}" ng-repeat='(key,doc) in documents' ng-click='seedetails(doc.id)'>
+					<div class="item line{{getNum(key)}}">
+						<div class="picto{{getNum(key)}}" style="background-image: url('{{doc.vignette}}');"></div>
+						<div class="texte{{getNum(key)}}">
+							<div class="texte_content{{getNum(key)}}">
+								<div class="titre{{getNum(key)}}" ng-bind-html='escapedHtml(doc.titre)'></div>
+								<div class="description{{getNum(key)}}">
+									Par <span ng-bind-html='escapedHtml(doc.contributeur)'></span>
+								</div>
+							</div>
+							<div class="medias_mark">
+								<div class="res sound" ng-if="doc.sound"></div>
+								<div class="res video" ng-if="doc.video"></div>
+							</div>
+							<div class='note_aff' style='background-image: url("images/{{doc.note}}_star.svg");'></div>
+						</div>
+					</div>
+				</div>
+				<div class="spacer"> </div>
+				<div class="suite" ng-if="suite" ng-click='charger();'>
+                    <div class="suite_texte">Voir la suite</div>
+                </div>
+			</div>
+			<div ng-if='!_is_connected'>
+			    <div class="spacer"> </div>
+                <div ng-include='"views/hors-ligne.html"'></div>
+            </div>
+		</div>
+	</body>
+	
+	<script type="text/javascript" id="dynJS" src="js_pages/width_inf/marque.js"></script>
+
+</html>

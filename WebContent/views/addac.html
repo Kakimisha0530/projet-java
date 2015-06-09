@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<style>
+* {
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+html, body {
+	padding: 0;
+	padding: 0;
+}
+
+body {
+	width: 100%;
+	height: 100%;
+}
+
+a {
+	text-decoration: none;
+	color: #335115;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.page {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	padding: 10% 2%;
+}
+
+.row {
+	width: 100%;
+}
+
+form {
+	width: 40%;
+	margin: 40px auto;
+}
+
+form>div {
+	margin-bottom: 16px;
+}
+
+form input:not([type="radio"]) {
+	width: 100%;
+	height: 40px;
+	text-align: center;
+	border: 1px solid #94A385;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-webkit-appearance: none;
+}
+
+form input[type="number"] {
+	width: 20%;
+}
+
+form textarea {
+	width: 100%;
+	border: 1px solid #94A385;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-webkit-appearance: none;
+}
+
+form input[type="submit"] {
+	border: none;
+	background: #94A385;
+	color: #FFF;
+	font-weight: bold;
+}
+
+.error {
+	color: red;
+}
+
+.white button {
+	border: none;
+	background: #94A385;
+	color: #fff;
+	font-weight: bold;
+	height: 40px;
+	text-align: center;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-webkit-appearance: none;
+	margin: 10px;
+	width: 200px;
+	float: right;
+}
+</style>
+</head>
+
+<body>
+<div class="header">
+		<div class="btn_panel_left" onclick="openL();"></div>
+		<div class="rub"> Mon Agenda </div>
+	</div>
+<div class="main div-scroll">
+	<div>Nouvelle activite
+	</div>
+
+	<div class="planning">
+		<div class="plan_l">
+			<form>
+				<div>
+		Catégorie : 
+		<select id="act_cat" name="act_cat" required="required" ng-model='ac_view.categorieId' class="select_box">
+			<option ng-repeat="(ke,val) in cates" value="{{ke}}">{{val.nom}}</option>
+		</select>
+	</div>
+	<div>
+		<input type="radio" id="act_all_day_1" name="act_all_day" value="1" onchange="if($(this).is(':checked')){$('#act_heure').css('display','none');}" {{ac_view.all?"checked":""}}/> Toute la journée
+	</div>
+	<div>
+		<input type="radio" id="act_all_day_0" name="act_all_day" value="0"  onchange="if($(this).is(':checked')){$('#act_heure').css('display','block');}" {{!ac_view.all?"checked":""}}/> Définir les horaires
+		<ul style='display: {{ac_view.all?"none":"block"}};' id="act_heure">
+			<li style="list-style: none;">
+				De <input type="number" id="act_h_d" min=0 max=23 ng-model='ac_view.deb_h'>
+				:<input type="number"  id="act_m_d" min=0 max=59 ng-model='ac_view.deb_m'>
+				à <input type="number" id="act_h_f" min=0 max=24 ng-model='ac_view.fin_h'>
+				:<input type="number"  id="act_m_f" min=0 max=59 ng-model='ac_view.fin_m'>
+			</li>
+		</ul>
+	</div>
+	<div>
+		Description : 
+		<textarea rows="5" cols="50" name="act_texte" required="required" ng-model='ac_view.texte'></textarea>
+	</div>
+	<div>
+		<input type="submit" value='Ajouter' ng-click="addAc()"/>
+	</div>
+	<input type="hidden" name="act_debut" id="act_debut" value="" ng-model='ac_view.debut'>
+	<input type="hidden" name="act_fin" id="act_fin" value="" ng-model='ac_view.fin'>
+			</form>
+		</div>
+
+		<div class="plan_r">
+		</div>
+	</div>
+</div>
+<script>
+	$(document).ready(function(){
+		$('#act_heure').css('display','none');
+		updateInterval();
+		$("#act_h_d, #act_h_f, #act_m_d, #act_m_f").change(function(){
+			updateInterval();
+		})
+	});
+	
+	function updateInterval(){
+		$("#act_debut").val(twoChar($("#act_h_d").val()) + "" + twoChar($("#act_m_d").val()));
+		$("#act_fin").val(twoChar($("#act_h_f").val()) + "" + twoChar($("#act_m_f").val()));
+	}
+	
+	function twoChar(sr){
+		return (sr.lenght < 2)?"0"+sr:sr;
+	}
+</script>
+</body>
+</html>

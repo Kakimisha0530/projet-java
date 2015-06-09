@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<!--<link rel="stylesheet" type="text/css" id="dyn"/>-->
+		<script>
+			//$("link#dyn").attr("href", "css_pages/" + ((larg < 500)?"width_inf":"width_sup")+ "/galerie_detail.css");
+			//$("script#dynJS").attr("src", "js_pages/" + ((larg < 500)?"width_inf":"width_sup")+ "/galerie_detail.js");
+			/*{
+				rel : "stylesheet",
+				type : "text/css",
+				href : 
+			}).appendTo("head");*/
+		</script>
+		<!--<script>
+			$("<link/>", {
+				rel : "stylesheet",
+				type : "text/css",
+				href : "css_pages/" + ((larg < 500)?"width_inf":"width_sup")+ "/galerie_detail.css"
+			}).appendTo("head");
+		</script>-->
+		<link rel="stylesheet" media="screen and (max-width: 500px)" href="css_pages/width_inf/galerie_detail.css" type="text/css" />
+		<link rel="stylesheet" media="screen and (min-width: 501px)" href="css_pages/width_sup/galerie_detail.css" type="text/css" />
+	</head>
+
+	<body>
+
+		<div class="header">
+			<div class="btn_back" ng-click='open()'></div>
+			<div class="rub">
+				y étiez vous ?
+			</div>
+			<div class="btn_panel_right" style='background-image: url("{{user_profil.avatar}}")' onclick="openR();"></div>
+		</div>
+		<div class="slider" data-snap-ignore="true">
+				<div ng-include='"views/slider.html"'></div>
+			</div>
+		<div class="swipe_button">
+			<div class="swipe_touch {{mySwiper.class}}" ng-click='up()'></div>
+		</div>
+
+		<div class="cache_loader" ng-show='loading'>
+			<div class="loader">
+				<img src="images/loader.gif" ng-show='loading'/>
+			</div>
+		</div>
+
+		<div class="main">
+		    <div ng-if='_is_connected'>
+			<div class="head_galerie {{'cate' + mygalerie.idgalerie}}">
+				<div class="line4">
+					<div class="texte4_detail">
+						<div class="texte_content4">
+							<div class="titre4" ng-bind-html="mygalerie.titregalerie "></div>
+							<div class="description4" ng-bind-html="mygalerie.titrecate "></div>
+							<div class="date4" ng-bind-html="parseDate(mygalerie.date)"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<img ng-repeat='(key,val) in photos' class="img_galerie" ng-src="{{val.photo}}"/>
+			</div>
+			<div ng-if='!_is_connected'>
+			    <div class='spacer'></div>
+			    <div ng-include='"views/hors-ligne.html"'></div>
+			</div>
+		</div>
+
+	</body>
+	
+	<script type="text/javascript" id="dynJS" src="js_pages/width_inf/galerie_detail.js"></script>
+
+</html>

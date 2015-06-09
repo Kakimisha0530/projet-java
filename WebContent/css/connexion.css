@@ -1,0 +1,88 @@
+@CHARSET "UTF-8";
+* {
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+html, body {
+	padding: 0;
+	padding: 0;
+}
+body {
+	width: 100%;
+	height: 100%;
+}
+
+.cache_loader_connect {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background: #ffffff;
+	z-index: 1000;
+}
+
+.page {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	padding: 10% 2%;
+}
+.row {
+	width: 100%;
+}
+.brand img {
+	display: block;
+	width: 30%;
+	max-width: 300px;
+	height: auto;
+	margin: 0 auto;
+}
+.brand_line img {
+	display: block;
+	width: 50%;
+	max-width: 300px;
+	height: auto;
+	margin: 0 auto;
+}
+
+form {
+	width: 80%;
+	margin: 30px auto;
+}
+form > div {
+	margin-bottom: 16px;
+}
+form input {
+	width: 100%;
+	height: 30px;
+	text-align: center;
+	border: 1px solid #E2DA00;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-webkit-appearance: none;
+}
+form input[type="submit"] {
+	border: none;
+	background: #E2DA00;
+	color: #FFF;
+}
+.error {
+	color: red;
+}
+
+.picto_info_connect {
+	width: 50px;
+	height: 50px;
+	background-color: #E2DA00;
+	background-image: url('../images/info_connect.svg');
+	background-size: 90% 90%;
+	background-position: center center;
+	border-radius: 25px;
+	margin: 20px auto;
+}

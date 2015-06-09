@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<!--<link rel="stylesheet" type="text/css" id="dyn"/>-->
+		<script>
+			//$("link#dyn").attr("href", "css_pages/" + ((larg < 500)?"width_inf":"width_sup")+ "/profil_detail.css");
+			//$("link#dynJS").attr("href", "js_pages/" + ((larg < 500)?"width_inf":"width_sup")+ "/profil_detail.js");
+			/*{
+				rel : "stylesheet",
+				type : "text/css",
+				href : 
+			}).appendTo("head");*/
+		</script>
+		<!--<script>
+			$("<link/>", {
+				rel : "stylesheet",
+				type : "text/css",
+				href : "css_pages/" + ((larg < 500)?"width_inf":"width_sup")+ "/profil_detail.css"
+			}).appendTo("head");
+		</script>-->
+		<link rel="stylesheet" media="screen and (max-width: 500px)" href="css_pages/width_inf/profil_detail.css" type="text/css" />
+		<link rel="stylesheet" media="screen and (min-width: 501px)" href="css_pages/width_sup/profil_detail.css" type="text/css" />
+	</head>
+
+	<body>
+	
+		<div class="white"></div>
+
+		<div class="header">
+			<div class="btn_back" ng-click='open()'></div>
+			<div class="rub">
+				notre réseau
+			</div>
+			<div class="btn_panel_right" style='background-image: url("{{user_profil.avatar}}")' onclick='openR();'></div>
+		</div>
+		<div class="slider" data-snap-ignore="true">
+				<div ng-include='"views/slider.html"'></div>
+			</div>
+		<div class="swipe_button">
+			<div class="swipe_touch {{mySwiper.class}}" ng-click='up()'></div>
+		</div>
+
+		<div class="cache_loader" ng-show='loading'>
+			<div class="loader">
+				<img src="images/loader.gif" ng-show='loading'/>
+			</div>
+		</div>
+
+		<div class="main">
+		    <div ng-if='_is_connected'>
+			<div class="head_member_profil">
+				<div class="col_members_left">
+					<div class="avatar_member_profil" style='background-image: url("{{profil.avatar}}")'></div>
+					<!--<div class="profil_members_pictosociete" style='background-image: url("{{profil.logo}}")' ng-if='profil.logo != ""'></div>-->
+					<img ng-if="isNotVide(profil.logo)" ng-src="{{profil.logo}}"/>
+				</div>
+				<div class="infos_member_profil">
+					<div class="profil_detail_nom" ng-bind-html="escapedHtml(profil.nom + ' ' + profil.prenom)"></div>
+					<div class="profil_detail_societe" ng-bind-html="escapedHtml(profil.societe)"></div>
+					<div class="profil_detail_poste" ng-bind-html="escapedHtml(profil.poste)"></div>
+					<div class="profil_detail_dateentree" ng-bind-html="profil.entree"></div>
+				</div>
+			</div>
+			<div class="greenLine"></div>
+			<div class="profil_detail_fonction">Fonction au Club : <span ng-bind-html="escapedHtml(profil.fonction)"></span></div>
+			<div class="description_detail_profil" ng-bind-html="escapedHtml(profil.profil)"></div>
+			<div class="social_detail_profil">
+				<div class="item_social_profil" ng-if='profil.portable != ""'>
+					<a href='tel:{{getphone(profil.portable)}}'> <div class="item_social_picto p_phone" ></div>
+					<div class="item_social_url">
+						{{profil.portable}}
+					</div> </a>
+				</div>
+				<div class="item_social_profil" ng-if='profil.mail != ""'>
+					<a href='mailto:{{profil.mail}}'> <div class="item_social_picto p_mail"></div>
+					<div class="item_social_url">
+						{{profil.mail}}
+					</div> </a>
+				</div>
+				<div class="item_social_profil" ng-if='profil.linkedin != ""'>
+					<a ng-click='openUrl_s(profil.linkedin)'> <div class="item_social_picto p_link"></div>
+					<div class="item_social_url">
+						profil linkedin
+					</div> </a>
+				</div>
+				<div class="item_social_profil" ng-if='profil.twitter != ""'>
+					<a ng-click='openUrl_s(profil.twitter)'> <div class="item_social_picto p_twit"></div>
+					<div class="item_social_url">
+						profil twitter
+					</div> </a>
+				</div>
+				<div class="item_social_profil" ng-if='profil.facebook != ""'>
+					<a ng-click='openUrl_s(profil.facebook)'> <div class="item_social_picto p_fac"></div>
+					<div class="item_social_url">
+						profil facebook
+					</div> </a>
+				</div>
+			</div>
+			<div class="infosplus_detail_profil">
+				<div class="item_infoplus_profil" ng-if='isNotVide(profil.activite)'>
+				    <b>DOMAINE D'ACTIVIT&Eacute; : </b><span ng-bind-html="escapedHtml(profil.activite)"></span>
+				</div>
+				<!--<div class="item_infoplus_profil">
+				    <b>DOMAINE(S) D'EXPERTISE : </b>
+				    <ul>
+				    	<li ng-if='isNotVide(profil.expertise1)'><span ng-bind-html="profil.expertise1"></span></li>
+				    	<li ng-if='isNotVide(profil.expertise2)'><span ng-bind-html="profil.expertise2"></span></li>
+				    	<li ng-if='isNotVide(profil.expertise3)'><span ng-bind-html="profil.expertise3"></span></li>
+				    	<li ng-if='isNotVide(profil.expertise4)'><span ng-bind-html="profil.expertise4"></span></li>
+				    	<li ng-if='isNotVide(profil.expertise5)'><span ng-bind-html="profil.expertise5"></span></li>
+				    </ul>
+				</div>-->
+				<div class="item_infoplus_profil" ng-if='isNotVide(profil.expertise1) || isNotVide(profil.expertise2) || isNotVide(profil.expertise3) || isNotVide(profil.expertise4) || isNotVide(profil.expertise5)'>
+					<b>DOMAINE(S) D'EXPERTISE : </b> 
+					<span ng-if='isNotVide(profil.expertise1)' ng-bind-html="escapedHtml(profil.expertise1)"></span><span ng-if='isNotVide(profil.expertise1) && isNotVide(profil.expertise2)'>, </span>
+					<span ng-if='isNotVide(profil.expertise2)' ng-bind-html="escapedHtml(profil.expertise2)"></span><span ng-if='isNotVide(profil.expertise2) && isNotVide(profil.expertise3)'>, </span>
+					<span ng-if='isNotVide(profil.expertise3)' ng-bind-html="escapedHtml(profil.expertise3)"></span><span ng-if='isNotVide(profil.expertise3) && isNotVide(profil.expertise4)'>, </span>
+					<span ng-if='isNotVide(profil.expertise4)' ng-bind-html="escapedHtml(profil.expertise4)"></span><span ng-if='isNotVide(profil.expertise4) && isNotVide(profil.expertise5)'>, </span>
+					<span ng-if='isNotVide(profil.expertise5)' ng-bind-html="escapedHtml(profil.expertise5)">
+				</div>
+				<div class="item_infoplus_profil" ng-if='profil.partners != ""'>
+					<b>PARTENAIRES : </b><span ng-bind-html='escapedHtml(profil.partners)'></span>
+				</div>
+				<div class="item_infoplus_profil" ng-if='profil.parrain != ""'>
+					<b>PARRAIN : </b><span ng-bind-html='escapedHtml(profil.parrain)'></span>
+				</div>
+				<div class="item_infoplus_profil" ng-if='profil.clubs != ""'>
+					<b>AUTRES CLUBS : </b><span ng-bind-html='escapedHtml(profil.clubs)'></span>
+				</div>
+			</div>
+			</div>
+			<div ng-if='!_is_connected'>
+                <div class='spacer'></div>
+                <div ng-include='"views/hors-ligne.html"'></div>
+            </div>
+		</div>
+
+	</body>
+	
+	<script type="text/javascript" id="dynJS" src="js_pages/width_inf/profil_detail.js"></script>
+		
+</html>
